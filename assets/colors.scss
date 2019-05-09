@@ -1,0 +1,133 @@
+//////////////////
+//              //
+//    COLORS    //
+//              //
+//////////////////
+
+////////////////////////////////////
+// 1) Globally-Named Theme Colors //
+////////////////////////////////////
+
+// Primary Colors
+$brand-primary: #212529;
+$brand-info:    #EA9A74;
+$comp-green:    #40D78E; // used for selected property card and approved badges
+$comp-dkgreen:  #32C17C; // progressindex completed step
+$comp-blue:     #4591E1; // progressindex current step
+$comp-ltblue:   #5698E6; // side nav brand bg
+$comp-pstlblue: #a4c9ef; // sidebar nav-group heading color
+$comp-yellow:   #f5c903; // used for pending badges
+$comp-dkred:    #a94442; // used for form validation errors
+$comp-red:      #F42F67; // used for required fields and rejected badges
+$comp-pink:     #F694F6; // pink accents
+
+// Shades of Grey
+$comp-charcoal: #243E5A;
+$comp-marengo:  #53687F; // https://en.wikipedia.org/wiki/Shades_of_gray#Marengo
+$comp-gnmtl:    #5F768E;
+$comp-dkgrey:   #7990A8; // card titles 
+$comp-mdgrey:   #97ABC0; // element labels 
+$comp-ltgrey:   #B2C1D0; 
+$comp-dksilver: #C8D6E4;
+$comp-silver:   #D5DFE9; // used for page & element borders
+$comp-ltsilver: #E4EBF3;
+$comp-offwhite: #F5F9FC; // used for card background
+$comp-ghostly:  #FAFDFF; // hover state for items on a card background
+$comp-white:    #FFFFFF; // white
+
+
+// Shadows
+$comp-shadow-silver: rgba(213,223,234,0.4);
+$comp-shadow-grey:   rgba(121,144,168,0.49);
+$comp-shadow-dkgrey: rgba(36,62,90,0.3);
+$comp-shadow-black:  rgba(0,0,0,0.27);
+
+
+///////////////////////////////////////////////////
+// 2) [Component / UI]-Named Colors & Properties //
+///////////////////////////////////////////////////
+
+// Page
+$comp-page-body-color:      $comp-gnmtl;
+$comp-page-bg-color:        $comp-silver;
+$comp-page-title-color:     $comp-dkgrey;  // page title grey
+$comp-page-header-bg-color: $comp-dksilver;
+
+// Sidebar
+$comp-sidebar-bg-color:         $comp-blue; // main background color
+$comp-sidebar-active-bg-color:  rgba(58,129,205,0.61); // current menu item
+$comp-sidebar-brand-bg-color:   $comp-ltblue; // logo space
+$comp-sidebar-navheading-color: $comp-pstlblue;
+
+// Navbar
+$comp-navbar-icon-color:      $comp-mdgrey; // navbar icons (dropdowns
+$comp-navbar-indicator-color: $comp-red;    // Notifications Indicator
+
+// Card
+$comp-card-shadow:          0 1px 2px 0 $comp-shadow-dkgrey;
+$comp-card-bg-color:        $comp-white;
+$comp-card-title-dk-color:  $comp-gnmtl;
+$comp-card-title-color:     $comp-dkgrey; // card title grey, campaign title
+$comp-card-subtitle-color:  $comp-mdgrey;
+$comp-card-separator-color: $comp-silver; // card separator
+
+// Property Card
+$comp-propcard-shadow:          0 1px 2px 0 $comp-shadow-grey;
+$comp-propcard-border-color:    $comp-silver;
+$comp-propcard-bg-color:        $comp-white;
+$comp-propcard-title-color:     $comp-dkgrey;
+$comp-propcard-subtitle-color:  $comp-mdgrey;
+$comp-propcard-checkbox-color:  $comp-ltgrey; // color of unchecked checkbox border
+
+$comp-propcard-active-shadow:          0px 0px 0px 3px $comp-green;
+$comp-propcard-active-border-color:    $comp-green;
+$comp-propcard-active-bg-color:        $comp-green;
+$comp-propcard-active-title-color:     $comp-white;
+$comp-propcard-active-checkbox-color:  $comp-white;
+
+// Campaign Details
+$comp-campaign-title-color: $comp-dkgrey;
+$comp-campaign-icon-color:  $comp-ltgrey;
+
+// Status Badges
+$comp-badge-accepted-bg-color: $comp-green;
+$comp-badge-accepted-color:    $comp-white;
+$comp-badge-rejected-bg-color: $comp-red;
+$comp-badge-rejected-color:    $comp-white;
+$comp-prop-badge-icon-color:   $comp-ltgrey;
+$comp-prop-badge-text-color:   #243E5A; // may need to update this value... 
+
+// Buttons
+$comp-btn-shadow:                 0 1px 2px 0 $comp-shadow-dkgrey;
+$comp-btn-text-color:             $comp-white;
+$comp-btn-primary-bg-color:       $comp-blue;
+$comp-btn-primary-bg-hover-color: #55a4f6;
+$comp-btn-danger-bg-color:        $comp-red;
+$comp-btn-danger-bg-hover-color:  #fe497c;
+$comp-btn-success-bg-color:       $comp-green;
+$comp-btn-success-bg-hover-color: #53E29D;
+$comp-btn-dark-bg-color:          $comp-dkgrey;
+
+// ProgressIndex Colors
+$comp-progress-next-bg-color:  $comp-ltgrey; // next background
+$comp-progress-next-color:     $comp-white;  // next text-color
+$comp-progress-curr-bg-color:  $comp-blue;   // current background
+$comp-progress-curr-color:     $comp-white;  // current text-color
+$comp-progress-prev-bg-color:  $comp-dkgreen; // previous background
+$comp-progress-prev-color:     $comp-white;  // previous text-color
+$comp-progress-dots-color:     $comp-ltgrey; // all dots should be ltgrey
+
+// Forms / Labels / Fields
+$comp-label-color:             $comp-mdgrey;    // field label grey
+$comp-label-required-color:    $comp-red;
+$comp-field-border-color:      $comp-silver;
+$comp-field-bg-color:          $comp-white;
+$comp-field-placeholder-color: $comp-ltgrey;
+$comp-field-text-color:        $comp-dkgrey; // same as carat on select UI
+$comp-error-text-color:        $comp-red;
+
+// Dropzone
+$comp-dropzone-color: $comp-ltgrey;
+
+// Element-specific Shadows (box-shadow defs, not just colors)
+$comp-image-shadow: 0px 1px 2px 0px $comp-shadow-dkgrey;

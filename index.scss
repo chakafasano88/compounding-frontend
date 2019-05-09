@@ -1,0 +1,234 @@
+@import "~bootstrap/scss/bootstrap";
+// Required
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~quill/dist/quill.core.css";
+@import "./assets/colors.scss";
+@import 'node_modules/@fortawesome/fontawesome-svg-core/styles';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, Geneva, sans-serif;
+  background: rgb(236, 253, 245);
+}
+
+a {
+	cursor: pointer;
+	color: $comp-charcoal;
+	&:hover,
+	&:focus {
+    color: darken($comp-charcoal, 10%);
+	}
+	&:active {
+		color: darken($comp-charcoal, 15%);
+  }
+}
+
+.dropdown-menu {
+  padding: 10px;
+
+  .dropdown-item {
+    &:hover,
+    &:focus {
+      background: $comp-offwhite
+    }
+    &:active {
+      color: darken($comp-charcoal, 15%);
+    }
+  }
+}
+
+  .navigation {
+    height: 100vh;
+    padding: 30px 0;
+    .link-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 100px;
+
+      a {
+        font-size: 30px;
+        h1 {
+          .letter {
+            color: red;
+            // &:hover {
+            //   color: red;
+            // }
+          }
+        }
+      }
+    }
+
+  }
+
+  .page__wrapper {
+    padding: 50px;
+  }
+
+  .btn {
+   border-radius: 2px;	
+    &.btn-primary {
+      background-color: $brand-primary;
+      border-color: $brand-primary;
+    }
+
+    &.btn-secondary {
+      background-color: $brand-info;
+      border-color: $brand-info;
+    }
+
+    &.full-width {
+      width: 100%;
+    }
+  }
+
+  .editor {
+    min-height: 600px;
+    max-height: 700px;
+    overflow-y: auto;
+    .card-body {
+      max-height: 650px;
+      .quill {
+        height: 400px;
+        .ql-container {
+          height: 70%;
+        }
+      }
+    }
+  }
+
+  .quill.is-invalid {
+     .ql-container {
+       border-color: red;
+     }
+  }
+
+  .navbar {
+    height: 80px;
+    background-color: $comp-white;
+  }
+  
+
+  .list-group {
+		max-height: 200px;
+		overflow-y: auto;
+		border: solid 1px #ddd;
+		border-radius: 2px;
+		margin: 0;
+
+		.list-group-item {
+			font-size: 14px;
+			font-weight: normal;
+			border-left: none;
+			border-right: none;
+			border-bottom: none;
+			cursor: pointer;
+			margin-top: -1px;
+
+			&:hover {
+				background: $comp-offwhite;;
+			}
+
+			&.selected {
+				transition: background 0.2s;
+				background: #eee;
+			}
+		}
+  }
+  
+  .no-gutter > [class*='col-'] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.comp-logo {
+  background-image: url('./static/comp_logo.jpg');
+  min-height: 157px;
+	background-color: #E1E1E1;	
+	box-shadow: 0 0 4px 0 rgba(0,0,0,0.1);
+	background-size: auto 60%;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+.loader__backdrop {
+	background: rgba(0, 0, 0, 0.1);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 9998;
+}
+
+.loader {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	right: 0;
+	bottom: 0;
+	z-index: 9999;
+}
+
+input.is-invalid.form-control {
+  border-color: red !important;
+}
+
+
+@keyframes slide-left {
+  from {
+      transform: translate3d(110%, 0, 0);
+      visibility: visible;
+      opacity: 0
+      }   
+      to {          
+        transform: translate3d(0, 0, 0); 
+        opacity: 1;   
+      }   
+  }
+  
+.toast--slide-in {            
+  visibility: visible;           
+  opacity: 1;            
+  animation-name: slide-left;     
+  animation-duration: 0.5s !important;
+   
+}
+     
+.toast--fade-out {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.2s, opacity 0.2s ease, transform 0.2s ease;
+  transform: scale(0.9);
+}
+  
+.Toastify__toast--success {       
+  background-color: #40D78E !important;       
+}
+  
+.Toastify__toast--error {
+  background-color: #F42F67 !important;     
+}
+
+select {
+  &.form-control, &.form-control:focus {
+      background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 1440'%3E%3Cpath d='m720 1090l-576-576h1152z'/%3E%3C/svg%3E") no-repeat right 6px center;
+      background-size: 15px 10px;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      option {
+          padding: 4px 3px;
+          color: #555;
+      }
+      option:disabled {
+          font-weight: 300;
+    background: #f3f3f3;
+    color: #777;
+      }
+  }
+&.form-control:disabled {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 1440'%3E%3Cpath fill='%23999' d='m720 1090l-576-576h1152z'/%3E%3C/svg%3E");
+}
+}

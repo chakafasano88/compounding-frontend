@@ -1,0 +1,281 @@
+@import "../../../assets/colors.scss";
+
+//
+// CompCard Styles
+//
+
+// @ body { font-size: 16px }
+// 10px = 0.625rem
+// 11px = 0.6875rem
+// 12px = 0.75rem
+// 13px = 0.8125rem
+// 14px = 0.875rem
+// 15px = 0.9375rem
+// 16px = 1.0rem
+// 17px = 1.0625rem
+// 18px = 1.125rem
+// 19px = 1.1875rem
+// 20px = 1.25rem
+// 22px = 1.375rem
+// 23px = 1.4375rem
+// 24px = 1.5rem
+
+// Fields
+// Required Asterisk
+label span.required {
+    color: $comp-label-required-color;
+}
+
+
+//
+// Default CompCard Styles
+//
+
+.comp-card-wrapper { // wraps the .comp-card.card element.
+    margin: 0;
+    padding: 1px 3px 3px 3px; // give space for box-shadow to render
+}
+
+.comp-card {
+    margin: 0 15px;
+    &.card {
+        border-radius: 0;
+        background-color: $comp-card-bg-color;
+        box-shadow: $comp-card-shadow;
+        border: 0 none;
+    }
+    .card-header {
+        background-color: $comp-card-bg-color;
+        border-bottom: 1px solid $comp-silver;
+        color: $comp-card-title-color;
+        font-size: .9rem;
+    }
+    .card-footer {
+        background-color: $comp-card-bg-color;
+    }
+
+    .comp-tab-filter {
+        margin: -1.25rem -1.25rem 1.25rem -1.25rem;
+    }
+    .card-body + .card-body {
+        border-top: 1px solid $comp-silver;
+    }
+    
+    hr {
+        margin: 0 -1.25rem;
+    } 
+
+    .card-row {
+        background-color: $comp-ghostly;
+        padding: 25px;
+        max-height: 150px;
+        overflow: hidden;
+          &:hover {
+            background-color: $comp-offwhite;
+            cursor: pointer;
+          }
+        &__no-pointer {
+            background-color: $comp-ghostly;
+            padding: 25px;
+            &:hover {
+                cursor: auto;
+              }
+        }
+    }
+
+    .card-row__img {
+       box-shadow: $comp-image-shadow;
+       width: 100px;
+       height: 100px;
+       margin-right: 15px;
+    }
+
+    .card-row__img-avatar {
+        box-shadow: $comp-image-shadow;
+        width: 50px;
+        height: 50px;
+        margin-right: 15px;
+    }
+
+    .card-row__post-img {
+        box-shadow: $comp-image-shadow;
+        width: 100%;
+        margin-top: 20px 
+    }
+
+    .card-row__btn-wrapper {
+        margin-top: 20px
+    }
+
+    .card-row__details {
+        line-height: 0.9rem;
+        color: $comp-dkgrey;
+    }
+
+    .card-row__title {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .card-row {
+        margin-top: 5px;
+        font-size: .8125rem;
+        line-height: 1.2rem;
+        a {
+            cursor: pointer;
+        }
+        &__message-none{
+            color: $comp-mdgrey;
+            font-size: .875rem !important;
+            border-bottom: none;
+        }
+        &__empty {
+            text-align: center;
+        }
+    }
+
+    .card-row__comment {
+        margin-top: 10px;
+        font-size: .75rem;
+        font-weight: 600;
+        color: $comp-red;
+        line-height: 1.1rem;
+        i {
+          font-size: 16px;
+          margin-right: 7px;
+          vertical-align:-0.1rem;
+        }
+    }
+
+    .card-row__details-dates {
+      font-size: .8125rem;
+    }
+
+    .card-row__dates {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: $comp-ltgrey;
+      font-size: .75rem;
+      .DateRangePickerInput_arrow_svg {
+        margin: -4px 10px 0px 10px;
+        width: 0.8125rem; 
+        color: $comp-mdgrey;
+      }
+      .svg-inline--fa {
+        color: $comp-ltgrey;
+        margin-right: 10px;
+      }
+    }
+}
+
+@media (min-width: 768px) {
+    .comp-card {
+        .card-row__post-img {
+            box-shadow: $comp-image-shadow;
+            width: 50%;
+            margin: 20px 0 20px 65px;
+        }
+    }
+}
+  
+
+// Form Element Styling (maybe should be moved to a main form styles sheet)
+
+.comp-card {
+    label {
+        font-size: 0.625rem;    
+        font-weight: bold; 
+        letter-spacing: 1px;    
+        line-height: 0.875rem;
+        text-transform: uppercase;
+        color: $comp-label-color;
+        .help-text {
+            font-weight: normal;
+            text-transform: none;
+        }
+    }
+
+    .DateRangePickerInput,
+    input[type=text], 
+    input[type=number], 
+    input[type=email], 
+    input[type=password], 
+    select, 
+    textarea, {
+        background-color: $comp-field-bg-color;
+        border-radius: 0;
+        font-size: 12px;
+        color: $comp-charcoal;
+        border-color: $comp-field-border-color;
+    }
+    .custom-select {
+        height: auto;
+    }
+    .invalid-feedback {
+        &::before, &::after {
+            display: none;
+        }
+        border: none;
+        background: transparent;
+        font-size: 11px;
+        padding: 0px 5px 2px 5px;
+        margin: 7px 0px 0px 2px;
+        border-radius: 5px;
+        width: auto;
+        position: relative;
+        color: $comp-error-text-color;
+    }
+
+    .DateInput_input {
+        padding: 4px 15px;
+    }
+}
+
+// 
+// Dropzone Tweaks
+// 
+.comp-card {
+    .dropzone-box {
+        background-color: $comp-field-bg-color;
+        border: 1px dashed $comp-dropzone-color;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        padding: 15px !important;
+    }
+    .dz-placeholder {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        color: $comp-dropzone-color;
+        .dz-icon {
+            font-size: 3rem;
+            & + div {
+                margin-left: 1.25rem;
+            }
+        }
+        p {
+            text-align: left;
+            font-family: "Open Sans";
+            font-weight: bold;
+            font-size: 0.75rem;  
+            line-height: 1.4375rem;
+            .dz-heading {  
+                font-size: 0.875rem;
+                font-weight: bold; 
+            }
+        }
+    }
+    .dz-subheading {
+        font-weight: 300;
+    }      
+}     
+
+.comp-card .comp-tab-filter.list-group .list-group-item {
+    border-left: 1px solid $comp-propcard-border-color;
+    border-top: 0; 
+}
+.comp-card .comp-tab-filter.list-group .list-group-item:first-child {
+    border-left: 0;
+}
