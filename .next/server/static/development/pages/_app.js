@@ -753,9 +753,9 @@ function createClient(_ref) {
     uri:  true ? endpoint : undefined,
     request: function request(operation) {
       operation.setContext({
-        fetchOptions: {
-          credentials: 'include'
-        },
+        // fetchOptions: {
+        //   credentials: 'include',
+        // },
         headers: headers
       });
     },
