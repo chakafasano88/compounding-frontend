@@ -47,9 +47,8 @@ class Header extends Component {
             <div>
                 {!currentUser ? (
                     <Navbar color="dark" dark expand="md">
-                        <NavbarBrand href="/"> 
+                        <NavbarBrand href="/">
                             Compounding
-                            {/* <div className="comp-logo"></div> */}
                         </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
@@ -61,7 +60,7 @@ class Header extends Component {
                                     <DropdownMenu right>
                                         <Link href="/login">
                                             <DropdownItem>
-                                            <a>Login</a> 
+                                                <a>Login</a>
                                             </DropdownItem>
                                         </Link>
                                         <Link href="/signup">
@@ -74,19 +73,21 @@ class Header extends Component {
                             </Nav>
                         </Collapse>
                     </Navbar>
-                    ) : (
+                ) : (
                         <Navbar color="dark" dark expand="md">
-                            <NavbarBrand href="/"> 
+                            <NavbarBrand href="/">
                                 Compounding
-                                {/* <div className="comp-logo" ></div> */}
                             </NavbarBrand>
                             <NavbarToggler onClick={this.toggle} />
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
                                     <UncontrolledDropdown nav inNavbar>
-                                        <DropdownToggle nav>
-                                        <FontAwesomeIcon size="lg" icon="user-circle"></FontAwesomeIcon> 
-                                    </DropdownToggle>
+                                        <div className="d-flex align-items-center" >
+                                            <a style={{ fontSize: 15, cursor: 'default', color: '#CCCDCF' }} >Hello {currentUser.name}</a> 
+                                            <DropdownToggle nav>
+                                                <FontAwesomeIcon size="lg" icon="user-circle"></FontAwesomeIcon>
+                                            </DropdownToggle>
+                                        </div>
                                         <DropdownMenu right>
                                             <Link href="/post">
                                                 <DropdownItem>
@@ -104,21 +105,21 @@ class Header extends Component {
                                                 </DropdownItem>
                                             </Link>
                                             <DropdownItem divider />
-                                                <Mutation
-                                                    mutation={SIGN_OUT_MUTATION}
-                                                    refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-                                                >
-                                                    {signout => {
-                                                        return (
-                                                            <DropdownItem onClick={async e => {
-                                                                await signout();
-                                                                Router.push('/');
-                                                            }}>
-                                                                <a>Logout</a>
-                                                            </DropdownItem>
-                                                        )
-                                                    }}
-                                                </Mutation>
+                                            <Mutation
+                                                mutation={SIGN_OUT_MUTATION}
+                                                refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+                                            >
+                                                {signout => {
+                                                    return (
+                                                        <DropdownItem onClick={async e => {
+                                                            await signout();
+                                                            Router.push('/');
+                                                        }}>
+                                                            <a>Logout</a>
+                                                        </DropdownItem>
+                                                    )
+                                                }}
+                                            </Mutation>
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </Nav>

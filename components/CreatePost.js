@@ -70,16 +70,11 @@ class CreatePost extends Component {
     }
 
     _handleEditorChange = (value) => {
-        this.setState({ description: value })
+        this.setState({ description: value, formProcessing: false })
     }
 
     _saveToState = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
-    _handleError = (error) => {
-        this.setState({ formProcessing: false })
-        return (<Error error={error} />);
+        this.setState({ [e.target.name]: e.target.value, formProcessing: false });
     }
 
     render() {
@@ -103,7 +98,7 @@ class CreatePost extends Component {
                             Router.push({ pathname: `/${path}` });
                         }}
                         >
-                            {formProcessing && error && this._handleError(error)}
+                            {formProcessing && error && <Error error={error} />}
                             {loading && <Loader />}
                             <Row className="no-gutter">
                                 <Col sm={3}>

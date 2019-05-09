@@ -6,6 +6,9 @@ const DisplayError = ({ error }) => {
   if (!error || !error.message) return null;
   if (error.networkError && error.networkError.result && error.networkError.result.errors.length) {
     toast.error('Please check the form for errors.');
+  } 
+  if(error.graphQLErrors) {
+    error.graphQLErrors.map(err => (toast.error(err.message)))
   }
   return (
     <></>

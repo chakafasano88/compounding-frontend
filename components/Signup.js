@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import Link from 'next/link';
 import Router from 'next/router';
+import { CURRENT_USER_QUERY } from './User';
 
 const SIGN_UP_MUTATION = gql`
     mutation SIGN_UP_MUTATION(
@@ -43,7 +44,7 @@ class Signup extends Component {
         const { name, password, email } = this.state;
         return (
             <div>
-                <Mutation mutation={SIGN_UP_MUTATION} variables={this.state} >
+                <Mutation mutation={SIGN_UP_MUTATION} variables={this.state} refetchQueries={[{ query: CURRENT_USER_QUERY }]} >
                     {(signup, { error, loading }) => (
                         <Form method="post" onSubmit={async e => {
                             e.preventDefault();
