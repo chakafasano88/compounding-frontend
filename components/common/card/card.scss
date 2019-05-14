@@ -203,10 +203,15 @@ label span.required {
     select, 
     textarea, {
         background-color: $comp-field-bg-color;
-        border-radius: 0;
-        font-size: 12px;
         color: $comp-charcoal;
-        border-color: $comp-field-border-color;
+        padding: 13px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-style: normal;
+        border: 1px solid  $comp-field-border-color;
+        display: block;
+        transition: all 0.1s linear 0s;
+        outline: currentcolor none medium;
     }
     .custom-select {
         height: auto;

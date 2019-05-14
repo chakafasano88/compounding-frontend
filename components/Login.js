@@ -32,11 +32,9 @@ class Login extends Component {
         super(props)
 
         this.state = {
-            login: {
-                email: '',
-                password: ''
-            },
-            formProcessing: false
+            email: '',
+            password: '',
+            // formProcessing: false
   
         }
     }
@@ -50,10 +48,10 @@ class Login extends Component {
 
 
     render() {
-        const { name, formProcessing, login } = this.state;
+        const { email, password, formProcessing } = this.state;
         return (
             <div>
-                <Mutation mutation={LOGIN_MUTATION} variables={login} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+                <Mutation mutation={LOGIN_MUTATION} variables={this.state} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
                     {(login, { error, loading, data }) => (
                         <Form method="post" onSubmit={async e => {
                             e.preventDefault();
@@ -78,7 +76,7 @@ class Login extends Component {
                                                     <Input
                                                         type="email"
                                                         name="email"
-                                                        value={login.email}
+                                                        value={email}
                                                         placeholder="Enter email..."
                                                         onChange={this._saveToState}
                                                     >
@@ -89,7 +87,7 @@ class Login extends Component {
                                                     <Input
                                                         type="password"
                                                         name="password"
-                                                        value={login.password}
+                                                        value={password}
                                                         onChange={this._saveToState}
                                                         placeholder="Enter password...">
                                                     </Input>
