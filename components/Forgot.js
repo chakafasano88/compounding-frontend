@@ -1,44 +1,59 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, CardHeader, CardBody, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-// import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import Link from 'next/link';
 import Router from 'next/router';
 import { toast } from 'react-toastify';
 import { CURRENT_USER_QUERY } from './User';
-import Error from './ErrorMessage'
+import gql from 'graphql-tag';
+import Error from './ErrorMessage';
 import Loader from './Loader';
 import CompCard from '../components/common/card/Card';
 import CompButton from '../components/common/button/Button';
+
+const FORGOT_PASSWORD_MUTATION = gql`
+   mutation FORGOT_PASSWORD_MUTATION($password: String! $confirmPassword: String! $resetToken: String!) {
+       resetPassword(password: $password, confirmPassword: $confirmPassword, resetToken: $resetToken) {
+            id
+       }
+   }
+   
+`;
 
 class Forgot extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: ''
+            password: '',
+            confirmPassword: '',
+            resetToken: ''
         }
+    }
+
+    componentDidMount() {
+        this.setState({ resetToken: this.props.resetToken })
     }
 
     _saveToState = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
-            formProcessing: false 
+            formProcessing: false
         });
     }
 
     render() {
-        const { formProcessing } = this.state;
+        const { formProcessing, password, confirmPassword } = this.state;
         return (
             <div>
                 <div>
-                    <Mutation mutation={LOGIN_MUTATION} variables={this.state.email} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
-                        {(login, { error, loading, data }) => (
+                    <Mutation mutation={FORGOT_PASSWORD_MUTATION} variables={this.state} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+                        {(resetPassword, { error, loading, data }) => (
                             <Form method="post"
                                 onSubmit={async e => {
                                     e.preventDefault();
 
                                     this.setState({ formProcessing: true })
-                                    const res = await login();
+                                    const res = await resetPassword();
                                     this.setState({ email: null })
 
                                     Router.push('/');
@@ -53,24 +68,30 @@ class Forgot extends Component {
                                             <CompCard>
                                                 <CardHeader>Reset your password</CardHeader>
                                                 <CardBody>
-                                                    <p>Enter your email address and we will send you a link to reset your password.</p>
+                                                    <p>Enter your new password.</p>
 
-                                                    <FormGroup style={{ textAlign: 'center' }}>
-
+                                                    <FormGroup>
+                                                        <Label>Password</Label>
+                                                        <Input
+                                                            type="password"
+                                                            name="password"
+                                                            value={password}
+                                                            onChange={this._saveToState}
+                                                            placeholder="Enter password...">
+                                                        </Input>
                                                     </FormGroup>
                                                     <FormGroup>
-                                                        <Label>Email</Label>
+                                                        <Label>Confirm Password</Label>
                                                         <Input
-                                                            type="email"
-                                                            name="email"
-                                                            value={this.state.email}
-                                                            placeholder="Enter email..."
-                                              s              onChange={this._saveToState}
-                                                        >
+                                                            type="password"
+                                                            name="confirmPassword"
+                                                            value={confirmPassword}
+                                                            onChange={this._saveToState}
+                                                            placeholder="Confirm password...">
                                                         </Input>
                                                     </FormGroup>
                                                     <div className="text-center">
-                                                        <CompButton loading={loading} icon="cog" color="primary" className="full-width">Login</CompButton>
+                                                        <CompButton loading={loading} icon="cog" color="primary" className="full-width">Reset Password</CompButton>
                                                     </div>
                                                 </CardBody>
                                             </CompCard>
