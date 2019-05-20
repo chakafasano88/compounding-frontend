@@ -4,7 +4,7 @@ import Science from '../components/Science';
 const science = (props) => {
     return (
         <div>
-            <Science />
+            <Science currentUser={props.currentUser} />
         </div>
     );
 };

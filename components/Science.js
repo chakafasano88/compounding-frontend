@@ -16,6 +16,7 @@ class Science extends Component {
 
     render() {
         const filter = { filter: "SCIENCE" };
+        const { currentUser } = this.props;
         return (
             <div>
                 <Row className="no-gutter" >
@@ -29,7 +30,7 @@ class Science extends Component {
                                         if (error) return <p>Error: {error.message}</p>;
                                         return (
                                             <div>
-                                                <PostList posts={data.posts} />
+                                                <PostList posts={data.posts} currentUser={currentUser} />
                                             </div>
                                         );
                                     }}

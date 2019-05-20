@@ -4,7 +4,7 @@ import Business from '../components/Business';
 const business = (props) => {
     return (
         <div>
-            <Business />
+            <Business currentUser={props.currentUser} />
         </div>
     );
 };

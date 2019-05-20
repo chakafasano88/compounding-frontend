@@ -4,7 +4,7 @@ import Investing from '../components/Investing';
 const investing = (props) => {
     return (
         <div>
-            <Investing />
+            <Investing currentUser={props.currentUser} />
         </div>
     );
 };
