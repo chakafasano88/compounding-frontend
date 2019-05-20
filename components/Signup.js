@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, CardHeader, CardBody, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import CompCard from '../components/common/card/Card';
+import CompButton from '../components/common/button/Button';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import Link from 'next/link';
 import Router from 'next/router';
 import { CURRENT_USER_QUERY } from './User';
+import Error from './ErrorMessage';
 
 const SIGN_UP_MUTATION = gql`
     mutation SIGN_UP_MUTATION(
         $email: String! 
         $password: String!
-        $name: String!
+        $confirmPassword: String!
+        $firstName: String!
+        $lastName: String!
     ) {
-        signup(email: $email, name: $name, password: $password) {
+        signup(email: $email, firstName: $firstName, lastName: $lastName, password: $password, confirmPassword: $confirmPassword) {
             token 
             user {
                 id
                 email
-                name
+                
             }
         }
     }
@@ -31,27 +35,35 @@ class Signup extends Component {
         this.state = {
             email: '',
             password: '',
-            name: ''
+            firstName: '',
+            lastName: '',
+            confirmPassword: '',
+            formSubmitted: false,
+            formProcessing: false
+
         }
     }
 
     _saveToState = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({ [e.target.name]: e.target.value, formProcessing: false });
     }
 
-
     render() {
-        const { name, password, email } = this.state;
+        const { firstName, lastName, confirmPassword, password, email, formProcessing } = this.state;
         return (
             <div>
                 <Mutation mutation={SIGN_UP_MUTATION} variables={this.state} refetchQueries={[{ query: CURRENT_USER_QUERY }]} >
                     {(signup, { error, loading }) => (
                         <Form method="post" onSubmit={async e => {
                             e.preventDefault();
+                            this.setState({ formSubmitted: true, formProcessing: true })
+
                             await signup();
+
+                            this.setState({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" })
                             Router.push('/');
-                            this.setState({ name: "", email: "", password: "" })
                         }} >
+                            {formProcessing && error && <Error error={error} />}
                             <Container>
                                 <Row>
                                     <Col sm={3}></Col>
@@ -59,14 +71,25 @@ class Signup extends Component {
                                         <CompCard>
                                             <CardHeader>Signup</CardHeader>
                                             <CardBody>
+                                                <FormGroup>
+                                                    <Label>Name</Label>
+                                                    <Input
+                                                        type="text"
+                                                        name="firstName"
+                                                        value={firstName}
+                                                        placeholder="Enter first name..."
+                                                        onChange={this._saveToState}
+                                                    >
+                                                    </Input>
+                                                </FormGroup>
 
                                                 <FormGroup>
                                                     <Label>Name</Label>
                                                     <Input
                                                         type="text"
-                                                        name="name"
-                                                        value={name}
-                                                        placeholder="Enter name..."
+                                                        name="lastName"
+                                                        value={lastName}
+                                                        placeholder="Enter last name..."
                                                         onChange={this._saveToState}
                                                     >
                                                     </Input>
@@ -92,8 +115,19 @@ class Signup extends Component {
                                                         placeholder="Enter password...">
                                                     </Input>
                                                 </FormGroup>
+                                                <FormGroup>
+                                                    <Label>Password</Label>
+                                                    <Input
+                                                        invalid={this._isInvalid}
+                                                        type="password"
+                                                        name="confirmPassword"
+                                                        value={confirmPassword}
+                                                        onChange={this._saveToState}
+                                                        placeholder="Confirm password...">
+                                                    </Input>
+                                                </FormGroup>
                                                 <div className="text-center">
-                                                    <Button color="primary" className="full-width">Sign Up</Button>
+                                                <CompButton loading={loading} color="primary" icon="cog" className="full-width">Signup</CompButton>
                                                     <div className="mt-2">
                                                         <Link href="/forgot">
                                                             <a>Forgot Password ?</a>

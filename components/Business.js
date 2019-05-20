@@ -15,7 +15,7 @@ class Business extends Component {
     }
 
     render() {
-        const filter = { filterTerm: "BUSINESS" };
+        const filter = { filter: "BUSINESS" };
         return (
             <div>
                 <Row className="no-gutter" >

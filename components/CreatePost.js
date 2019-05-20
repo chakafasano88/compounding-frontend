@@ -3,12 +3,13 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Badge, Button, CardBody, CardFooter, CardHeader, Col, Form, FormFeedback, FormGroup, Input, Label, Row, ListGroup, ListGroupItem } from "reactstrap";
 import CompCard from '../components/common/card/Card';
+import CompButton from '../components/common/button/Button';
 import Loader from './Loader';
 import Router from 'next/router';
 import CURRENT_USER_QUERY from './User';
+import { POSTS_QUERY } from './Think';
 import { toast } from 'react-toastify';
 import Error from './ErrorMessage'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 let ReactQuill = null
 
@@ -85,6 +86,7 @@ class CreatePost extends Component {
                 <Mutation
                     mutation={CREATE_POST_MUTATION}
                     variables={{ description, title, types }}
+                    refetchQueries={[{ query: POSTS_QUERY, variables: { filter: types } }]}
                 >
                     {(createPost, { loading, data, error }) => (
                         <Form name="editorForm" method="post" onSubmit={async e => {
@@ -155,10 +157,7 @@ class CreatePost extends Component {
                                                 </>
                                             )}
                                             <div className="d-flex justify-content-end mt-3">
-                                                <Button type="submit" color="primary">
-                                                    {loading && formSubmitted && 
-                                                    (<FontAwesomeIcon spin color="white" icon="cog"></FontAwesomeIcon>)} Submit
-                                                </Button>
+                                                <CompButton loading={loading && formSubmitted} icon="cog" color="primary" className="full-width">Submit</CompButton>
                                             </div>
                                         </CardBody>
                                     </CompCard>

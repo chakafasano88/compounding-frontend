@@ -68,7 +68,7 @@ label span.required {
     .card-row {
         background-color: $comp-ghostly;
         padding: 25px;
-        max-height: 150px;
+        max-height: 160px;
         overflow: hidden;
           &:hover {
             background-color: $comp-offwhite;
@@ -134,12 +134,25 @@ label span.required {
         }
     }
 
+    .card__well {
+        background-color: $comp-dksilver;  
+    }
+
     .card-row__comment {
+        padding: 10px 8px;
         margin-top: 10px;
         font-size: .75rem;
-        font-weight: 600;
-        color: $comp-red;
+        color: $comp-mdgrey;
+        background-color: lighten($comp-dksilver, 10%);
+        display: flex;
         line-height: 1.1rem;
+        border-radius: 20px; 
+        p {
+            margin: 0;
+        }
+        .user {
+            font-weight: bold;
+        }
         i {
           font-size: 16px;
           margin-right: 7px;
@@ -204,7 +217,6 @@ label span.required {
     textarea, {
         background-color: $comp-field-bg-color;
         color: $comp-charcoal;
-        padding: 13px 16px;
         border-radius: 6px;
         font-size: 14px;
         font-style: normal;

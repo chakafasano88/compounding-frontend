@@ -5,10 +5,10 @@ import Post from "../components/Post";
 class PostList extends Component {
    
     render() {
-        const { posts } = this.props;
+        const { posts, currentUser } = this.props;
         return (
             <div>
-                {posts.map(post => <Post post={post} key={post.id} />)}
+                {posts.map(post => <Post post={post} currentUser={currentUser} key={post.id} />)}
             </div>
         );
     }

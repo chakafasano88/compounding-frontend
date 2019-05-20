@@ -15,7 +15,7 @@ class Science extends Component {
     }
 
     render() {
-        const filter = { filterTerm: "SCIENCE" };
+        const filter = { filter: "SCIENCE" };
         return (
             <div>
                 <Row className="no-gutter" >

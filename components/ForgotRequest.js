@@ -5,6 +5,7 @@ import Error from './ErrorMessage';
 import { Container, Row, Col, CardHeader, CardBody, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Loader from './Loader';
 import CompCard from '../components/common/card/Card';
+import CompButton from '../components/common/button/Button';
 
 const REQUEST_RESET_MUTATION = gql`
   mutation REQUEST_RESET_MUTATION($email: String!) {
@@ -62,7 +63,7 @@ class ForgotRequest extends Component {
                           </Input>
                         </FormGroup>
                         <div className="text-center">
-                          <Button color="primary" className="full-width">Send Password Reset Email</Button>
+                          <CompButton loading={loading} color="primary" icon="cog" className="full-width">Send password reset email</CompButton>
                         </div>
                       </CardBody>
                     </CompCard>

@@ -57,7 +57,7 @@ class Header extends Component {
                                     <DropdownToggle nav caret>
                                         Login
                                         </DropdownToggle>
-                                    <DropdownMenu right>
+                                    <DropdownMenu className="animate slideIn"  right>
                                         <Link href="/login">
                                             <DropdownItem>
                                                 <a>Login</a>
@@ -83,12 +83,12 @@ class Header extends Component {
                                 <Nav className="ml-auto" navbar>
                                     <UncontrolledDropdown nav inNavbar>
                                         <div className="d-flex align-items-center" >
-                                            <a style={{ fontSize: 15, cursor: 'default', color: '#CCCDCF' }} >Hello {currentUser.name}</a> 
+                                            <a style={{ fontSize: 15, cursor: 'default', color: '#CCCDCF' }}>Hello {currentUser.firstName}</a> 
                                             <DropdownToggle nav>
                                                 <FontAwesomeIcon size="lg" icon="user-circle"></FontAwesomeIcon>
                                             </DropdownToggle>
                                         </div>
-                                        <DropdownMenu right>
+                                        <DropdownMenu className="animate slideIn" right>
                                             <Link href="/post">
                                                 <DropdownItem>
                                                     <a>Articles</a>

@@ -6,7 +6,8 @@ const CURRENT_USER_QUERY = gql`
     query {
         me {
             id
-            name
+            firstName
+            lastName
             email
             permissions
         }
@@ -16,7 +17,7 @@ const CURRENT_USER_QUERY = gql`
 
 const User = (props) => (
     <Query {...props} fetchPolicy="network-only" query={CURRENT_USER_QUERY} >
-        {payload => {return props.children(payload)}}
+        {payload => { return props.children(payload)} }
     </Query>
 );
 

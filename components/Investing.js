@@ -15,7 +15,7 @@ class Investing extends Component {
     }
 
     render() {
-        const filter = { filterTerm: "INVESTING" };
+        const filter = { filter: "INVESTING" };
         return (
             <div>
                 <Row className="no-gutter" >

@@ -9,6 +9,7 @@ import { CURRENT_USER_QUERY } from './User';
 import Error from './ErrorMessage'
 import Loader from './Loader';
 import CompCard from '../components/common/card/Card';
+import CompButton from '../components/common/button/Button';
 
 class Forgot extends Component {
     constructor(props) {
@@ -64,12 +65,12 @@ class Forgot extends Component {
                                                             name="email"
                                                             value={this.state.email}
                                                             placeholder="Enter email..."
-                                                            onChange={this._saveToState}
+                                              s              onChange={this._saveToState}
                                                         >
                                                         </Input>
                                                     </FormGroup>
                                                     <div className="text-center">
-                                                        <Button color="primary" className="full-width">Send Password Reset Email</Button>
+                                                        <CompButton loading={loading} icon="cog" color="primary" className="full-width">Login</CompButton>
                                                     </div>
                                                 </CardBody>
                                             </CompCard>

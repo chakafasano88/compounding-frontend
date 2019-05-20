@@ -8,10 +8,9 @@ import withData from '../lib/withData';
 import User from "../components/User";
 import Loader from '../components/Loader';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStroopwafel, faCheck, faUserCircle, faCog, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faStroopwafel, faCheck, faUserCircle, faCog, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faStroopwafel, faCheck, faUserCircle, faCog, faHeart)
+library.add(faStroopwafel, faCheck, faUserCircle, faCog, faHeart, faComment)
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -35,9 +34,9 @@ class MyApp extends App {
                 return(
                   <Page currentUser={me} >
                     <div className="page__wrapper">
-                      <Component {...pageProps} />
+                      <Component currentUser={me} {...pageProps} />
                     </div>
-                </Page>
+                  </Page>
                 )
             }}
         </User>

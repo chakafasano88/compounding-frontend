@@ -9,7 +9,7 @@ import { CURRENT_USER_QUERY } from './User';
 import Error from './ErrorMessage'
 import Loader from './Loader';
 import CompCard from '../components/common/card/Card';
-
+import CompButton from '../components/common/button/Button';
 
 const LOGIN_MUTATION = gql`
     mutation LOGIN_MUTATION(
@@ -21,7 +21,7 @@ const LOGIN_MUTATION = gql`
             user {
                 id
                 email
-                name
+                
             }
         }
     }
@@ -93,7 +93,7 @@ class Login extends Component {
                                                     </Input>
                                                 </FormGroup>
                                                 <div className="text-center">
-                                                    <Button color="primary" className="full-width">Login</Button>
+                                                    <CompButton loading={loading} color="primary" icon="cog" className="full-width">Login</CompButton>
                                                     <div className="mt-2">
                                                         <Link href="/forgot">
                                                             <a>Forgot Password ?</a>

@@ -9,15 +9,30 @@ import Loader from "./Loader";
 import PostList from "../components/PostList";
 
 const POSTS_QUERY = gql`
-    query POSTS_QUERY($filterTerm: String!){
-        posts(filter: $filterTerm) {
+    query POSTS_QUERY($filter: String!){
+        posts(filter: $filter) {
             id
             description
             url
             types
+            votes {
+                id
+                user {
+                    id
+                }
+            }
+            comments {
+                id
+                description
+                user {
+                    id
+                    email
+                    firstName
+                    lastName
+                }
+            }
             postedBy { 
-                id 
-                name 
+                id  
                 email 
             }
         }
@@ -30,7 +45,8 @@ class Think extends Component {
     }
 
     render() {
-        const filter = { filterTerm: "THINKING" };
+        const { currentUser } = this.props;
+        const filter = { filter: 'THINKING' }
         return (
             <div>
                 <Row className="no-gutter" >
@@ -38,13 +54,13 @@ class Think extends Component {
                         <CompCard>
                             <CardHeader>Thinking Articles</CardHeader>
                             <CardBody>
-                                <Query query={POSTS_QUERY} variables={filter} >
+                                <Query query={POSTS_QUERY} variables={filter} refetchQueries={[{ query: POSTS_QUERY }]}>
                                     {({ data, error, loading }) => {
                                         if (loading) return <p>Loading...</p>;
                                         if (error) return <p>Error: {error.message}</p>;
                                         return (
                                         <div>
-                                           <PostList posts={data.posts} />
+                                           <PostList posts={data.posts} currentUser={currentUser} />
                                         </div>
                                         );
                                     }}

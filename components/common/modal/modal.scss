@@ -1,0 +1,41 @@
+$comp-card-heading-color:      #7990A8;
+$comp-field-bg-color:          #ffffff;
+$comp-field-placeholder-color: #B2C1D0;
+
+.comp-modal {
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        background-color: #F6F9FC;
+        color: $comp-card-heading-color;
+    }
+
+    .modal-body {
+        font-size: .875rem;
+    }
+
+    .modal-title {
+        color: #7990A8;
+        font-size: .875rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    input, select, textarea {
+        font-size: .8125rem;  
+        line-height: 1.125rem;
+        padding: .6875rem 1rem;
+        color: $comp-card-heading-color;
+        &::-webkit-input-placeholder,
+        &::-moz-placeholder,
+        &:-ms-input-placeholder,
+        &:-moz-placeholder,
+        &::placeholder {
+            color: $comp-field-placeholder-color;
+        }
+    }
+    input[type=text], input[type=email], input[type=password], select, textarea, {
+        background-color: $comp-field-bg-color;
+        border-radius: 0;
+    }
+}

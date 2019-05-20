@@ -6,7 +6,7 @@ const post = (props) => {
     return (
         <div>
             {!props.query.id && <CreatePost />} 
-            {props.query.id && <SinglePost postId={props.query.id} />}
+            {props.query.id && <SinglePost currentUser={props.currentUser} postId={props.query.id} />}
         </div>
     );
 };
