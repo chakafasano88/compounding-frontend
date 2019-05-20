@@ -72,7 +72,7 @@ class Signup extends Component {
                                             <CardHeader>Signup</CardHeader>
                                             <CardBody>
                                                 <FormGroup>
-                                                    <Label>Name</Label>
+                                                    <Label>First Name</Label>
                                                     <Input
                                                         type="text"
                                                         name="firstName"
@@ -84,7 +84,7 @@ class Signup extends Component {
                                                 </FormGroup>
 
                                                 <FormGroup>
-                                                    <Label>Name</Label>
+                                                    <Label>Last Name</Label>
                                                     <Input
                                                         type="text"
                                                         name="lastName"
@@ -116,7 +116,7 @@ class Signup extends Component {
                                                     </Input>
                                                 </FormGroup>
                                                 <FormGroup>
-                                                    <Label>Password</Label>
+                                                    <Label>Confirm Password</Label>
                                                     <Input
                                                         invalid={this._isInvalid}
                                                         type="password"
