@@ -99,11 +99,13 @@ class Header extends Component {
                                                     <a>Profile</a>
                                                 </DropdownItem>
                                             </Link>
-                                            <Link href="/users">
-                                                <DropdownItem>
-                                                    <a>Users</a>
-                                                </DropdownItem>
-                                            </Link>
+                                            {currentUser.permissions[0] === 'ADMIN' && (
+                                                <Link href="/users">
+                                                    <DropdownItem>
+                                                        <a>Users</a>
+                                                    </DropdownItem>
+                                                </Link>
+                                            )}
                                             <DropdownItem divider />
                                             <Mutation
                                                 mutation={SIGN_OUT_MUTATION}

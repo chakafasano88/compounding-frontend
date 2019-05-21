@@ -2,23 +2,45 @@ import React, { Component } from 'react';
 import { Table, CardHeader, CardBody, Button, Form, FormGroup, Label, Modal, ModalBody, ModalHeader, ModalFooter, Input } from 'reactstrap';
 import CompCard from './common/card/Card';
 import CompButton from './common/button/Button';
+import CompModal from './common/modal/Modal';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import generateUuid from '../lib/uuidGen';
 
 const CREATE_USER_MUTATION = gql`
-    mutation CREATE_USER_MUTATION($name: String!){
-        createUser(name: $string) {
+    mutation CREATE_USER_MUTATION(
+        $email: String! 
+        $firstName: String!
+        $lastName: String!
+        $permissions: String! 
+        $password: String!
+    ) {
+        createUser(email: $email, firstName: $firstName, lastName: $lastName, password: $password, permissions: $permissions) {
             id
+            email
         }
     }
-`
+`;
 
 class Users extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            isOpen: false
+            isOpen: false,
+            email: '',
+            firstName: '',
+            lastName: '',
+            password: generateUuid(),
+            permissions: 'USER',
+            permissionTypes: [{
+                id: 'USER',
+                name: 'User'
+            },{
+                id: 'ADMIN',
+                name: 'Admin'
+            }]
         }
     }
 
@@ -28,12 +50,17 @@ class Users extends Component {
         this.setState({ isOpen: !isOpen })
     }
 
+    _saveToState = (e) => {
+        this.setState({ [e.target.name]: e.target.value, formProcessing: false });
+    }
+
     render() {
+        const { firstName, lastName, permissions, password, email, permissionTypes } = this.state;
         return (
             <div>
                 <CompCard>
                     <CardHeader className="d-flex justify-content-between align-items-center">Users
-                        <Button type="button" onClick={this._toggleUserModal} color="default">Add User</Button>
+                        <Button type="button" size="sm" onClick={this._toggleUserModal} color="primary"><FontAwesomeIcon icon="plus" color="white" ></FontAwesomeIcon> Add User</Button>
                     </CardHeader>
                     <CardBody>
                         <Table striped>
@@ -57,32 +84,72 @@ class Users extends Component {
                     </CardBody>
                 </CompCard>
 
-                <Mutation mutation={CREATE_USER_MUTATION} >
-                    {(createUser, { error, loading, called }) => (
-                        <Form method="post" onSubmit={async e => {
-                            e.preventDefault();
+                <CompModal isOpen={this.state.isOpen} toggle={this._toggleUserModal}>
+                    <ModalHeader>Create a User</ModalHeader>
+                    <Mutation
+                        mutation={CREATE_USER_MUTATION}
+                        variables={{ firstName, lastName, email, permissions, password }}
+                    >
+                        {(createUser, { error, loading, called }) => (
+                            <Form method="post" onSubmit={async e => {
+                                e.preventDefault();
+                                this.setState({ password: generateUuid() })
+                                
+                                const res = await createUser();
+                                console.log("Success!", res)
 
-                            const res = await createUser();
-                        }}>
-                            <ModalBody>
-                                <FormGroup>
-                                    <Label>Comment</Label>
-                                    <Input
-                                        type="textarea"
-                                        name="description"
-                                        placeholder="Enter comment..."
-                                        onChange={this._saveToState}
-                                    >
-                                    </Input>
-                                </FormGroup>
+                            }}>
+                                <ModalBody>
+                                    <FormGroup>
+                                        <Label>First Name</Label>
+                                        <Input
+                                            type="text"
+                                            name="firstName"
+                                            value={firstName}
+                                            placeholder="Enter first name..."
+                                            onChange={this._saveToState}
+                                        >
+                                        </Input>
+                                    </FormGroup>
 
-                                <ModalFooter>
-                                    <CompButton onClick={e => this.setState({ isOpen: false })} type="submit" >Submit</CompButton>
-                                </ModalFooter>
-                            </ModalBody>
-                        </Form>
-                    )}
-                </Mutation>
+                                    <FormGroup>
+                                        <Label>Last Name</Label>
+                                        <Input
+                                            type="text"
+                                            name="lastName"
+                                            value={lastName}
+                                            placeholder="Enter last name..."
+                                            onChange={this._saveToState}
+                                        >
+                                        </Input>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label>Email</Label>
+                                        <Input
+                                            type="email"
+                                            name="email"
+                                            value={email}
+                                            placeholder="Enter email..."
+                                            onChange={this._saveToState}
+                                        >
+                                        </Input>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label>User Type</Label>
+                                        <select className="form-control" name="permissions" onChange={this._saveToState}>
+                                            {permissionTypes.map((type, i) => (
+                                                <option key={i} value={type.id}>{type.name}</option>
+                                            ))}
+                                        </select>
+                                    </FormGroup>
+                                    <ModalFooter>
+                                        <CompButton onClick={e => this.setState({ isOpen: false })} type="submit" >Submit</CompButton>
+                                    </ModalFooter>
+                                </ModalBody>
+                            </Form>
+                        )}
+                    </Mutation>
+                </CompModal>
 
             </div>
         );

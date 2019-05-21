@@ -8,9 +8,9 @@ import withData from '../lib/withData';
 import User from "../components/User";
 import Loader from '../components/Loader';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStroopwafel, faCheck, faUserCircle, faCog, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
+import { faStroopwafel, faCheck, faUserCircle, faCog, faHeart, faComment, faPlus } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faStroopwafel, faCheck, faUserCircle, faCog, faHeart, faComment)
+library.add(faStroopwafel, faCheck, faUserCircle, faCog, faHeart, faComment, faPlus)
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
