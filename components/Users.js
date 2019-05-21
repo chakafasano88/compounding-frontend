@@ -81,7 +81,6 @@ class Users extends Component {
                                 if (loading) return <p>Loading...</p>;
                                 if (error) return <p>Error: {error.message}</p>;
                                 const { users } = data;
-                                console.log("USER", users)
                                 return (
                                     <Table striped>
                                         <thead>
@@ -120,8 +119,6 @@ class Users extends Component {
                                 this.setState({ password: generateUuid() })
 
                                 const res = await createUser();
-                                console.log("Success!", res)
-
                             }}>
                                 <ModalBody>
                                     <FormGroup>
