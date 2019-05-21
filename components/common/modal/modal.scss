@@ -21,21 +21,24 @@ $comp-field-placeholder-color: #B2C1D0;
         text-transform: uppercase;
     }
 
-    input, select, textarea {
-        font-size: .8125rem;  
-        line-height: 1.125rem;
-        padding: .6875rem 1rem;
-        color: $comp-card-heading-color;
-        &::-webkit-input-placeholder,
-        &::-moz-placeholder,
-        &:-ms-input-placeholder,
-        &:-moz-placeholder,
-        &::placeholder {
-            color: $comp-field-placeholder-color;
+    select {
+        &.form-control, &.form-control:focus {
+            background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 1440'%3E%3Cpath d='m720 1090l-576-576h1152z'/%3E%3C/svg%3E") no-repeat right 6px center;
+            background-size: 15px 10px;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            option {
+                padding: 8px 3px;
+                color: #555;
+            }
+            option:disabled {
+                font-weight: 300;
+          background: #f3f3f3;
+          color: #777;
+            }
         }
-    }
-    input[type=text], input[type=email], input[type=password], select, textarea, {
-        background-color: $comp-field-bg-color;
-        border-radius: 0;
-    }
+        &.form-control:disabled {
+          background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 1440'%3E%3Cpath fill='%23999' d='m720 1090l-576-576h1152z'/%3E%3C/svg%3E");
+        }
+      }
 }
