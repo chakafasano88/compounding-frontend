@@ -3,7 +3,7 @@ import { Table, CardHeader, CardBody, Button, Form, FormGroup, Label, Modal, Mod
 import CompCard from './common/card/Card';
 import CompButton from './common/button/Button';
 import CompModal from './common/modal/Modal';
-import { Mutation } from 'react-apollo';
+import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import generateUuid from '../lib/uuidGen';
@@ -23,6 +23,19 @@ const CREATE_USER_MUTATION = gql`
     }
 `;
 
+const ALL_USERS_QUERY = gql`
+    query {
+        users {
+            id
+            firstName
+            lastName
+            email
+            status
+            permissions
+        }
+    }
+`
+
 class Users extends Component {
     constructor(props) {
         super(props);
@@ -37,7 +50,7 @@ class Users extends Component {
             permissionTypes: [{
                 id: 'USER',
                 name: 'User'
-            },{
+            }, {
                 id: 'ADMIN',
                 name: 'Admin'
             }]
@@ -63,27 +76,38 @@ class Users extends Component {
                         <Button type="button" size="sm" onClick={this._toggleUserModal} color="primary"><FontAwesomeIcon icon="plus" color="white" ></FontAwesomeIcon> Add User</Button>
                     </CardHeader>
                     <CardBody>
-                        <Table striped>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                        <Query query={ALL_USERS_QUERY}>
+                            {({ data, error, loading }) => {
+                                if (loading) return <p>Loading...</p>;
+                                if (error) return <p>Error: {error.message}</p>;
+                                const { users } = data;
+                                console.log("USER", users)
+                                return (
+                                    <Table striped>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Level</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {users.map((user, i) => (
+                                                <tr key={i} >
+                                                    <td>{user.firstName} {user.lastName}</td>
+                                                    <td>{user.email}</td>
+                                                    <td>{user.permissions[0]}</td>
+                                                    <td>{user.status === 1 ? 'Active' : 'Inactive'}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                );
+                            }}
+                        </Query>
                     </CardBody>
                 </CompCard>
-
                 <CompModal isOpen={this.state.isOpen} toggle={this._toggleUserModal}>
                     <ModalHeader>Create a User</ModalHeader>
                     <Mutation
@@ -94,7 +118,7 @@ class Users extends Component {
                             <Form method="post" onSubmit={async e => {
                                 e.preventDefault();
                                 this.setState({ password: generateUuid() })
-                                
+
                                 const res = await createUser();
                                 console.log("Success!", res)
 
