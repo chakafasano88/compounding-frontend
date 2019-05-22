@@ -46,7 +46,7 @@ class Navigation extends React.Component {
   _timeout = (route) => {
     setTimeout(() => {
       Router.push(route)
-    }, 1000);
+    }, 500);
   }
 
 
