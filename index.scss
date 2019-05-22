@@ -7,10 +7,15 @@
 @import "./assets/colors.scss";
 @import 'node_modules/@fortawesome/fontawesome-svg-core/styles';
 
+@font-face {
+  font-family:  'Product Sans';
+  src: url('./static/ProductSans-Regular.woff2')
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: 'Product Sans';
   background: rgb(236, 253, 245);
 }
 
@@ -29,6 +34,10 @@ a {
 p {
   color: $comp-dkgrey;
   font-size: .8125rem;
+}
+
+div[tabindex="1"]:focus {
+  outline: 0;
 }
 
 .dropdown-menu {  
@@ -92,24 +101,33 @@ p {
     .link-container {
       display: grid;
       padding: 100px;
+    }
 
-      a {
-        font-size: 30px;
-        text-decoration: none;
-        h1 {
-          .letter {
-            color: red;
-            // &:hover {
-            //   color: red;
-            // }
-          }
+    a {
+      font-size: 30px;
+      text-decoration: none;
+
+      .navigation__letter {
+        border: 1px solid #C2F8DA;
+        background-color: #C2F8DA;
+        color: #7AD3A8;
+        padding: 7.5px 15px;
+        margin-right: 2px;
+        border-radius: 10px; 
+        font-size: 45px;
+        font-weight: bold;
+
+        &.skinny {
+          padding: 7.5px 20px;
         }
       }
+
     }
   }
 
   .grow { transition: all .2s ease-in-out; }
   .grow:hover { transform: scale(1.15); }
+  .hover { transform: scale(1.15); } 
 
   .page__wrapper {
     padding: 50px;
@@ -158,6 +176,9 @@ p {
     .post-info__column {
       display: flex;
       border-bottom: 1px solid $comp-ltsilver;
+      a:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -169,6 +190,9 @@ p {
       max-height: 650px;
       .quill {
         height: 400px;
+        p {
+          color: black;
+        }
         .ql-container {
           height: 70%;
         }
@@ -185,6 +209,13 @@ p {
   .navbar {
     height: 80px;
     background-color: $comp-white;
+    .navbar-brand {
+        color: #56d7a5
+    }
+
+    .navbar-brand:hover {
+      color: #56d7a5
+    }
   }
   
 

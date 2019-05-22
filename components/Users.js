@@ -7,6 +7,7 @@ import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import generateUuid from '../lib/uuidGen';
+import Error from '../components/ErrorMessage';
 
 const CREATE_USER_MUTATION = gql`
     mutation CREATE_USER_MUTATION(
@@ -53,7 +54,9 @@ class Users extends Component {
             }, {
                 id: 'ADMIN',
                 name: 'Admin'
-            }]
+            }],
+            formSubmitted: false,
+            formProcessing: false
         }
     }
 
@@ -67,8 +70,18 @@ class Users extends Component {
         this.setState({ [e.target.name]: e.target.value, formProcessing: false });
     }
 
+    _isInvalid = () => {
+        const { firstName, lastName, permissions, email } = this.state;
+
+        if(firstName && lastName && permissions && email) {
+            return true;
+        } else {
+            false;
+        }
+    }
+
     render() {
-        const { firstName, lastName, permissions, password, email, permissionTypes } = this.state;
+        const { firstName, lastName, permissions, password, email, permissionTypes, formSubmitted, formProcessing } = this.state;
         return (
             <div>
                 <CompCard>
@@ -77,7 +90,7 @@ class Users extends Component {
                     </CardHeader>
                     <CardBody>
                         <Query query={ALL_USERS_QUERY}>
-                            {({ data, error, loading }) => {
+                            {({ data, error, loading, refetch }) => {
                                 if (loading) return <p>Loading...</p>;
                                 if (error) return <p>Error: {error.message}</p>;
                                 const { users } = data;
@@ -112,9 +125,11 @@ class Users extends Component {
                     <Mutation
                         mutation={CREATE_USER_MUTATION}
                         variables={{ firstName, lastName, email, permissions, password }}
-                    >
+                        refetchQueries={[{ query: ALL_USERS_QUERY }]}
+                        >
                         {(createUser, { error, loading, called }) => (
                             <Form method="post" onSubmit={async e => {
+                                this.setState({ formSubmitted: true, formProcessing: true })
                                 e.preventDefault();
                                 this.setState({ password: generateUuid() })
 
@@ -124,6 +139,7 @@ class Users extends Component {
                                     <FormGroup>
                                         <Label>First Name</Label>
                                         <Input
+                                            className={formSubmitted && !firstName ? "is-invalid" : ''}
                                             type="text"
                                             name="firstName"
                                             value={firstName}
@@ -136,6 +152,7 @@ class Users extends Component {
                                     <FormGroup>
                                         <Label>Last Name</Label>
                                         <Input
+                                            className={formSubmitted && !lastName ? "is-invalid" : ''}
                                             type="text"
                                             name="lastName"
                                             value={lastName}
@@ -147,6 +164,7 @@ class Users extends Component {
                                     <FormGroup>
                                         <Label>Email</Label>
                                         <Input
+                                            className={formSubmitted && !email ? "is-invalid" : ''}
                                             type="email"
                                             name="email"
                                             value={email}
@@ -164,7 +182,9 @@ class Users extends Component {
                                         </select>
                                     </FormGroup>
                                     <ModalFooter>
-                                        <CompButton onClick={e => this.setState({ isOpen: false })} type="submit" >Submit</CompButton>
+                                        <CompButton onClick={e =>{ 
+                                            if(!this._isInvalid) { return } else { this.setState({ isOpen: false }); } 
+                                            }} type="submit" >Submit</CompButton>
                                     </ModalFooter>
                                 </ModalBody>
                             </Form>

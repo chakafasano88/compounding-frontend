@@ -30,7 +30,7 @@ class Investing extends Component {
                                         if (error) return <p>Error: {error.message}</p>;
                                         return (
                                             <div>
-                                                <PostList posts={data.posts} currentUser={currentUsers} />
+                                                <PostList posts={data.posts} currentUser={currentUser} />
                                             </div>
                                         );
                                     }}

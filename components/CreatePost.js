@@ -14,8 +14,8 @@ import Error from './ErrorMessage'
 let ReactQuill = null
 
 const CREATE_POST_MUTATION = gql`
-    mutation CREATE_POST_MUTATION($description: String!, $title: String!, $types: String!) {
-        createPost(description: $description, title: $title, types: $types) {
+    mutation CREATE_POST_MUTATION($description: String!, $title: String!, $types: String!, $postId: String) {
+        createPost(description: $description, title: $title, types: $types, postId: $postId) {
             id
             description,
             title,
@@ -30,7 +30,6 @@ class CreatePost extends Component {
 
         this.state = {
             editor: false,
-            editorContent: null,
             toolBarOptions: {
                 toolbar: [
                     [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
@@ -38,6 +37,7 @@ class CreatePost extends Component {
                     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                     [{ 'list': 'ordered' }, { 'list': 'bullet' },
                     { 'indent': '-1' }, { 'indent': '+1' }],
+                    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
                     ['link', 'image', 'video'],
                     ['clean']
                 ]
@@ -117,7 +117,7 @@ class CreatePost extends Component {
                                 </Col>
                                 <Col sm={9}>
                                     <CompCard className="editor">
-                                        <CardHeader>Think</CardHeader>
+                                        <CardHeader>Create Post</CardHeader>
                                         <CardBody>
                                             <Row>
                                                 <Col sm={6}>
@@ -172,3 +172,4 @@ class CreatePost extends Component {
 }
 
 export default CreatePost;
+export { CREATE_POST_MUTATION };

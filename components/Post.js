@@ -118,7 +118,7 @@ class Post extends Component {
                                 <Col sm={1}></Col>
                                 <Col sm={11} className="post-info__column">
                                     {post.votes.length  > 0 && (<p className="mr-1" >{post.votes.length} <FontAwesomeIcon size="sm" color="coral" icon="heart"></FontAwesomeIcon></p>)}
-                                    {post.comments.length > 0 && (<a onClick={this._viewComments} ><p>{post.comments.length} <FontAwesomeIcon size="sm" icon="comment"></FontAwesomeIcon></p></a>)}
+                                    {post.comments.length > 0 && (<a onClick={this._viewComments} ><p>{post.comments.length} {post.comments.length > 1 ? 'Comments' : 'Comment'}</p></a>)}
                                 </Col>
                             </Row>
                             <Row>

@@ -48,7 +48,7 @@ label span.required {
         background-color: $comp-card-bg-color;
         border-bottom: 1px solid $comp-silver;
         color: $comp-card-title-color;
-        font-size: .9rem;
+        font-size: 1rem;
     }
     .card-footer {
         background-color: $comp-card-bg-color;
@@ -196,8 +196,8 @@ label span.required {
 
 .comp-card {
     label {
-        font-size: 0.625rem;    
-        font-weight: bold; 
+        font-size: 0.675rem;    
+        font-weight: 800; 
         letter-spacing: 1px;    
         line-height: 0.875rem;
         text-transform: uppercase;
