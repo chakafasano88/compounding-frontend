@@ -8,6 +8,7 @@ import gql from 'graphql-tag';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import generateUuid from '../lib/uuidGen';
 import Error from '../components/ErrorMessage';
+import { toast } from 'react-toastify';
 
 const CREATE_USER_MUTATION = gql`
     mutation CREATE_USER_MUTATION(
@@ -43,9 +44,9 @@ class Users extends Component {
 
         this.state = {
             isOpen: false,
-            email: '',
-            firstName: '',
-            lastName: '',
+            email: null,
+            firstName: null,
+            lastName: null,
             password: generateUuid(),
             permissions: 'USER',
             permissionTypes: [{
@@ -63,7 +64,7 @@ class Users extends Component {
 
     _toggleUserModal = () => {
         const { isOpen } = this.state;
-        this.setState({ isOpen: !isOpen })
+        this.setState({ isOpen: !isOpen, formProcessing: false })
     }
 
     _saveToState = (e) => {
@@ -73,10 +74,10 @@ class Users extends Component {
     _isInvalid = () => {
         const { firstName, lastName, permissions, email } = this.state;
 
-        if(firstName && lastName && permissions && email) {
-            return true;
+        if (firstName && lastName && permissions && email) {
+            return false;
         } else {
-            false;
+            return true;
         }
     }
 
@@ -120,21 +121,24 @@ class Users extends Component {
                         </Query>
                     </CardBody>
                 </CompCard>
-                <CompModal isOpen={this.state.isOpen} toggle={this._toggleUserModal}>
+                <CompModal isOpen={this.state.isOpen} toggle={this._toggleUserModal} onClosed={this._onModalClosed}>
                     <ModalHeader>Create a User</ModalHeader>
                     <Mutation
                         mutation={CREATE_USER_MUTATION}
                         variables={{ firstName, lastName, email, permissions, password }}
                         refetchQueries={[{ query: ALL_USERS_QUERY }]}
-                        >
-                        {(createUser, { error, loading, called }) => (
+                    >
+                        {(createUser, { called, loading, data, error }) => (
                             <Form method="post" onSubmit={async e => {
-                                this.setState({ formSubmitted: true, formProcessing: true })
                                 e.preventDefault();
-                                this.setState({ password: generateUuid() })
+                                this.setState({ formSubmitted: true, formProcessing: true , password: generateUuid() })
 
                                 const res = await createUser();
+
+                                if(res.data) this.setState({ isOpen: false })
+                                toast.success('User Created!')
                             }}>
+                                {formProcessing && error && <Error error={error} />}
                                 <ModalBody>
                                     <FormGroup>
                                         <Label>First Name</Label>
@@ -142,7 +146,6 @@ class Users extends Component {
                                             className={formSubmitted && !firstName ? "is-invalid" : ''}
                                             type="text"
                                             name="firstName"
-                                            value={firstName}
                                             placeholder="Enter first name..."
                                             onChange={this._saveToState}
                                         >
@@ -155,7 +158,6 @@ class Users extends Component {
                                             className={formSubmitted && !lastName ? "is-invalid" : ''}
                                             type="text"
                                             name="lastName"
-                                            value={lastName}
                                             placeholder="Enter last name..."
                                             onChange={this._saveToState}
                                         >
@@ -167,7 +169,6 @@ class Users extends Component {
                                             className={formSubmitted && !email ? "is-invalid" : ''}
                                             type="email"
                                             name="email"
-                                            value={email}
                                             placeholder="Enter email..."
                                             onChange={this._saveToState}
                                         >
@@ -182,9 +183,14 @@ class Users extends Component {
                                         </select>
                                     </FormGroup>
                                     <ModalFooter>
-                                        <CompButton onClick={e =>{ 
-                                            if(!this._isInvalid) { return } else { this.setState({ isOpen: false }); } 
-                                            }} type="submit" >Submit</CompButton>
+                                        <CompButton
+                                            onClick={e => {
+                                                if (error && !loading) return
+                                                // else if (!error && !loading) this.setState({ isOpen: false })
+                                            }}
+                                            icon="cog"
+                                            loading={loading}
+                                            type="submit" >Submit</CompButton>
                                     </ModalFooter>
                                 </ModalBody>
                             </Form>

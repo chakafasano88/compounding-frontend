@@ -3,9 +3,11 @@ import { Modal } from "reactstrap";
 import "./modal.scss";
 
 const CompModal = props => {
-  const { className } = props;
+  const { className, onClosed } = props;
+  
   return (
-    <Modal {...props} className={`comp-modal ${className}`}>
+    <Modal onClosed={onClosed}
+    {...props} className={`comp-modal ${className}`}>
       {props.children}
     </Modal>
   );
