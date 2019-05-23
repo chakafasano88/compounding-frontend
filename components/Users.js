@@ -184,10 +184,7 @@ class Users extends Component {
                                     </FormGroup>
                                     <ModalFooter>
                                         <CompButton
-                                            onClick={e => {
-                                                if (error && !loading) return
-                                                // else if (!error && !loading) this.setState({ isOpen: false })
-                                            }}
+                                            onClick={e => {if (error && !loading) return}}
                                             icon="cog"
                                             loading={loading}
                                             type="submit" >Submit</CompButton>
