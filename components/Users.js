@@ -25,6 +25,14 @@ const CREATE_USER_MUTATION = gql`
     }
 `;
 
+const DELETE_USER_MUTATION = gql`
+    mutation DELETE_USER_MUTATION($userId: ID!) {
+        deleteUser(userId: $userId) {
+            id
+        }
+    }
+`
+
 const ALL_USERS_QUERY = gql`
     query {
         users {
@@ -103,6 +111,7 @@ class Users extends Component {
                                                 <th>Email</th>
                                                 <th>Level</th>
                                                 <th>Status</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -112,6 +121,32 @@ class Users extends Component {
                                                     <td>{user.email}</td>
                                                     <td>{user.permissions[0]}</td>
                                                     <td>{user.status === 1 ? 'Active' : 'Inactive'}</td>
+                                                    <Mutation 
+                                                        mutation={DELETE_USER_MUTATION} 
+                                                        variables={{ userId: user.id }} 
+                                                        refetchQueries={[{ query: ALL_USERS_QUERY }]}
+                                                    >
+                                                        {(deleteUser, { called, loading, data, error }) => {
+                                                            return(
+                                                                <td className="d-flex justify-content-end">
+                                                                    <Button 
+                                                                        onClick={async e => { 
+                                                                            const res = await deleteUser();
+                                                                            toast.success('User deleted!')
+                                                                        }} 
+                                                                        color="danger" 
+                                                                        size="sm"
+                                                                    >
+                                                                    <FontAwesomeIcon 
+                                                                        color="white" 
+                                                                        icon="trash">
+                                                                        </FontAwesomeIcon>
+                                                                    </Button>
+                                                                </td>
+                                                            );
+                                                        }}
+                                                    </Mutation>
+
                                                 </tr>
                                             ))}
                                         </tbody>
@@ -131,11 +166,11 @@ class Users extends Component {
                         {(createUser, { called, loading, data, error }) => (
                             <Form method="post" onSubmit={async e => {
                                 e.preventDefault();
-                                this.setState({ formSubmitted: true, formProcessing: true , password: generateUuid() })
+                                this.setState({ formSubmitted: true, formProcessing: true, password: generateUuid() })
 
                                 const res = await createUser();
 
-                                if(res.data) this.setState({ isOpen: false })
+                                if (res.data) this.setState({ isOpen: false })
                                 toast.success('User Created!')
                             }}>
                                 {formProcessing && error && <Error error={error} />}
@@ -184,10 +219,11 @@ class Users extends Component {
                                     </FormGroup>
                                     <ModalFooter>
                                         <CompButton
-                                            onClick={e => {if (error && !loading) return}}
+                                            onClick={e => { if (error && !loading) return }}
                                             icon="cog"
                                             loading={loading}
-                                            type="submit" >Submit</CompButton>
+                                            type="submit" >Submit
+                                        </CompButton>
                                     </ModalFooter>
                                 </ModalBody>
                             </Form>
