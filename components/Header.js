@@ -48,7 +48,7 @@ class Header extends Component {
                 {!currentUser ? (
                     <Navbar color="dark" dark expand="md">
                         <NavbarBrand href="/">
-                            Compoundings
+                            Compounding
                         </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
