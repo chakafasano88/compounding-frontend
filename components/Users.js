@@ -104,7 +104,7 @@ class Users extends Component {
                                 if (loading) return <p>Loading...</p>;
                                 if (error) return <p>Error: {error.message}</p>;
                                 const { users } = data;
-                                const filteredUsers = users.filter(user => user.id !== currentUser.id)
+                                // const filteredUsers = users.filter(user => user.id !== currentUser.id)
                                 return (
                                     <Table responsive striped>
                                         <thead>
@@ -117,7 +117,7 @@ class Users extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {filteredUsers && filteredUsers.map((user, i) => (
+                                            {users.map((user, i) => (
                                                 <tr key={i} >
                                                     <td>{user.firstName} {user.lastName}</td>
                                                     <td>{user.email}</td>
