@@ -138,10 +138,7 @@ class Users extends Component {
                                                                         color="danger" 
                                                                         size="sm"
                                                                     >
-                                                                    <FontAwesomeIcon 
-                                                                        color="white" 
-                                                                        icon="trash">
-                                                                        </FontAwesomeIcon>
+                                                                    Delete
                                                                     </Button>
                                                                 </td>
                                                             );
