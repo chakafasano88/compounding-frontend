@@ -108,24 +108,33 @@ class SinglePost extends Component {
 
     render() {
         const { post, currentUser } = this.props
-        const { 
-            showComments, 
-            isEditing, 
-            editor, 
-            toolBarOptions, 
-            description, 
-            title, 
-            types, 
-            formProcessing, 
-            formSubmitted, 
-            typeOptions 
+        const {
+            showComments,
+            isEditing,
+            editor,
+            toolBarOptions,
+            description,
+            title,
+            types,
+            formProcessing,
+            formSubmitted,
+            typeOptions
         } = this.state;
-
+        console.log("current", currentUser)
         return (
             <div>
                 <CompCard className={`${isEditing && 'editor'}`} >
                     <CardHeader className="d-flex justify-content-between align-items-center">{post.title.toUpperCase()}
-                        <Button type="button" size="sm" onClick={this._editPost} color="primary"><FontAwesomeIcon size="sm" icon="edit" color="white" ></FontAwesomeIcon> Edit</Button>
+                        {currentUser && currentUser.permissions[0] === 'ADMIN' && (
+                        <Button
+                            type="button"
+                            size="sm"
+                            onClick={this._editPost}
+                            color="primary">
+                            <FontAwesomeIcon size="sm" icon="edit" color="white" ></FontAwesomeIcon>
+                            Edit
+                        </Button>)}
+
                     </CardHeader>
                     <CardBody>
                         {editor && isEditing && (

@@ -73,7 +73,7 @@ class Navigation extends React.Component {
           <Row>
             <Col sm={12} className="d-flex justify-content-center">
               <Link href="/about">
-                <a style={{ fontSize: '40px' }} id="compounding" className="grow"><span className="navigation__letter">C</span>ompounding</a>
+                <a style={{ fontSize: '55px' }} id="compounding" className="grow"><span className="navigation__letter lg">C</span>ompounding</a>
               </Link>
             </Col>
           </Row>
