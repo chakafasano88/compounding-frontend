@@ -139,7 +139,7 @@ class Users extends Component {
                                                                     >
                                                                     <FontAwesomeIcon 
                                                                         color="white" 
-                                                                        icon="trash">
+                                                                        icon="trash-alt">
                                                                         </FontAwesomeIcon>
                                                                     </Button>
                                                                 </td>
