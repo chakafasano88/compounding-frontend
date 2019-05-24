@@ -91,6 +91,7 @@ class Users extends Component {
 
     render() {
         const { firstName, lastName, permissions, password, email, permissionTypes, formSubmitted, formProcessing } = this.state;
+        const { currentUser } = this.props;
         return (
             <div>
                 <CompCard>
@@ -103,6 +104,7 @@ class Users extends Component {
                                 if (loading) return <p>Loading...</p>;
                                 if (error) return <p>Error: {error.message}</p>;
                                 const { users } = data;
+                                const filteredUsers = users.filter(user => user.id !== currentUser.id)
                                 return (
                                     <Table striped>
                                         <thead>
@@ -115,7 +117,7 @@ class Users extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {users.map((user, i) => (
+                                            {filteredUsers.map((user, i) => (
                                                 <tr key={i} >
                                                     <td>{user.firstName} {user.lastName}</td>
                                                     <td>{user.email}</td>
