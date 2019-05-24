@@ -104,7 +104,6 @@ class Users extends Component {
                                 if (loading) return <p>Loading...</p>;
                                 if (error) return <p>Error: {error.message}</p>;
                                 const { users } = data;
-                                // const filteredUsers = users.filter(user => user.id !== currentUser.id)
                                 return (
                                     <Table responsive striped>
                                         <thead>
@@ -139,11 +138,10 @@ class Users extends Component {
                                                                         color="danger" 
                                                                         size="sm"
                                                                     >
-                                                                    Delete
-                                                                    {/* <FontAwesomeIcon 
+                                                                    <FontAwesomeIcon 
                                                                         color="white" 
-                                                                        icon="trash-alt">
-                                                                        </FontAwesomeIcon> */}
+                                                                        icon="trash">
+                                                                        </FontAwesomeIcon>
                                                                     </Button>
                                                                 </td>
                                                             );
