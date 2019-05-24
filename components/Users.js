@@ -106,7 +106,7 @@ class Users extends Component {
                                 const { users } = data;
                                 const filteredUsers = users.filter(user => user.id !== currentUser.id)
                                 return (
-                                    <Table striped>
+                                    <Table responsive striped>
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
