@@ -139,10 +139,11 @@ class Users extends Component {
                                                                         color="danger" 
                                                                         size="sm"
                                                                     >
-                                                                    <FontAwesomeIcon 
+                                                                    Delete
+                                                                    {/* <FontAwesomeIcon 
                                                                         color="white" 
                                                                         icon="trash-alt">
-                                                                        </FontAwesomeIcon>
+                                                                        </FontAwesomeIcon> */}
                                                                     </Button>
                                                                 </td>
                                                             );
