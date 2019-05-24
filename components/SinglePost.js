@@ -131,8 +131,7 @@ class SinglePost extends Component {
                             size="sm"
                             onClick={this._editPost}
                             color="primary">
-                            <FontAwesomeIcon size="sm" icon="edit" color="white" ></FontAwesomeIcon>
-                            Edit
+                            <FontAwesomeIcon size="sm" icon="edit" color="white"> </FontAwesomeIcon> Edit
                         </Button>)}
 
                     </CardHeader>
