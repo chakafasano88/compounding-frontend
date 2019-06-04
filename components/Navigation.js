@@ -51,11 +51,9 @@ class Navigation extends React.Component {
 
 
   render() {
-
-    // ref={(c) => {this.div = c;}}
+    
     return (
       <div className="focusDiv" tabIndex="1" onKeyDown={this._handleKeyDown} ref={(c) => {this.div = c;}}>
-        {/* <div onKeyDown={this._handleKeyDown} ref={(c) => {this.div = c;}}>  */}
         <Container className="navigation">
           <Row>
             <Col sm={6} className="link-container">

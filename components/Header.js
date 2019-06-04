@@ -37,17 +37,34 @@ class Header extends Component {
         }
     }
 
+    componentDidMount() {
+        
+    }
+
+    _handleKeyDown = (event) => {
+        const key = event.keyCode;
+    
+        switch (key) {
+          case 84:
+            let tag1 = document.getElementById('thinking');
+            tag1.className = "hover";
+            this._timeout('/thinking');
+            return;
+        }
+    }
+
     _toggle = () => {
         this.setState({ isOpen: !this.state.isOpen });
     }
 
     render() {
         const { currentUser } = this.props;
+
         return (
             <div>
                 {!currentUser ? (
                     <Navbar color="dark" dark expand="md">
-                        <NavbarBrand href="/">
+                        <NavbarBrand onKeyDown={this._handleKeyDown} href="/">
                             Compounding
                         </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
@@ -75,7 +92,10 @@ class Header extends Component {
                     </Navbar>
                 ) : (
                         <Navbar color="dark" dark expand="md">
-                            <NavbarBrand href="/">
+                            <NavbarBrand 
+                                href="/"
+                                onKeyDown={this._handleKeyDown} 
+                                >
                                 Compounding
                             </NavbarBrand>
                             <NavbarToggler onClick={this.toggle} />

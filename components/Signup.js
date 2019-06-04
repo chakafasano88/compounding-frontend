@@ -40,7 +40,6 @@ class Signup extends Component {
             confirmPassword: '',
             formSubmitted: false,
             formProcessing: false
-
         }
     }
 

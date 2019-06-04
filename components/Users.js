@@ -169,7 +169,7 @@ class Users extends Component {
                                 const res = await createUser();
 
                                 if (res.data) this.setState({ isOpen: false })
-                                toast.success('User Created!')
+                                toast.success('User invitations sent!')
                             }}>
                                 {formProcessing && error && <Error error={error} />}
                                 <ModalBody>
