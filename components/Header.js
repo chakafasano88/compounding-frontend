@@ -65,7 +65,7 @@ class Header extends Component {
                 {!currentUser ? (
                     <Navbar color="dark" dark expand="md">
                         <NavbarBrand onKeyDown={this._handleKeyDown} href="/">
-                            Compounding
+                            FocusLoop
                         </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>

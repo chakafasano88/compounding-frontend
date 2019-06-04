@@ -35,7 +35,7 @@ class Navigation extends React.Component {
         tag4.className = "hover";
         this._timeout('/science');
         return;
-      case 67:
+      case 70:
         let tag5 = document.getElementById('compounding');
         tag5.className = "hover";
         this._timeout('/about');
@@ -71,7 +71,7 @@ class Navigation extends React.Component {
           <Row>
             <Col sm={12} className="d-flex justify-content-center">
               <Link href="/about">
-                <a style={{ fontSize: '55px' }} id="compounding" className="grow"><span className="navigation__letter lg">C</span>ompounding</a>
+                <a style={{ fontSize: '55px' }} id="compounding" className="grow"><span className="navigation__letter lg">F</span>ocusLoop</a>
               </Link>
             </Col>
           </Row>
