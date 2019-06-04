@@ -148,7 +148,7 @@ class SinglePost extends Component {
                                         this.setState({ formSubmitted: true, formProcessing: true })
 
                                         const res = await createPost();
-                                        toast.success('Post created!')
+                                        toast.success('Post updated!')
                                         this.setState({ isEditing: false })
                                     }}
                                     >
