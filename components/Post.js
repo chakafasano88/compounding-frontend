@@ -48,7 +48,7 @@ class Post extends Component {
 
     _toggleCommentModal = () => {
         const { isOpen } = this.state;
-        if(!this.props.currentUser) {
+        if (!this.props.currentUser) {
             return toast.error('You must logged in to do that!');
         }
 
@@ -75,7 +75,7 @@ class Post extends Component {
 
         let trimmedString = post.description.substr(0, 200);
         trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
-
+        console.log("posst", post)
         return (
             <div>
                 <Mutation
@@ -93,6 +93,7 @@ class Post extends Component {
                             {<Error error={error} />}
                             <Row className="card-row" onClick={this._navigate}>
                                 <Col sm={12}>
+                                    <h6>{post.title}</h6>
                                     <div className="d-flex">
                                         <img
                                             className="card-row__img-avatar"
@@ -114,40 +115,37 @@ class Post extends Component {
                                     </div>
                                 </Col>
                             </Row>
-                            <Row className="post-info__row" >
-                                <Col sm={1}></Col>
-                                <Col sm={11} className="post-info__column">
-                                    {post.votes.length  > 0 && (<p className="mr-1" >{post.votes.length} <FontAwesomeIcon size="sm" color="coral" icon="heart"></FontAwesomeIcon></p>)}
-                                    {post.comments.length > 0 && (<a onClick={this._viewComments} ><p>{post.comments.length} {post.comments.length > 1 ? 'Comments' : 'Comment'}</p></a>)}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col csm={1}></Col>
-                                <Col sm={11}>
-                                    <div className="comment-vote__wrapper">
-                                        <Button
-                                            type="submit">
-                                            <FontAwesomeIcon color={post.votes && currentUser && post.votes.find(p => p.user.id === currentUser.id) ? 'coral' : 'grey'} icon="heart"
-                                            >
-                                            </FontAwesomeIcon> Like
-                                        </Button>
-                                        <Button
-                                            type="button"
-                                            onClick={this._toggleCommentModal}
-                                            className="comment__button"
+                            <Row className="comment-like__row" >
+                                <Col className="comment-vote__column" sm={6}>
+                                    <Button
+                                        type="submit">
+                                        <FontAwesomeIcon color={post.votes && currentUser && post.votes.find(p => p.user.id === currentUser.id) ? 'coral' : 'grey'} icon="heart"
                                         >
-                                            <FontAwesomeIcon icon="comment"></FontAwesomeIcon> Comment
+                                        </FontAwesomeIcon> Like
                                         </Button>
-                                    </div>
+                                    <Button
+                                        type="button"
+                                        onClick={this._toggleCommentModal}
+                                        className="comment__button"
+                                    >
+                                        <FontAwesomeIcon icon="comment"></FontAwesomeIcon> Comment
+                                        </Button>
+                                </Col>
+                                <Col className="post-info__column" sm={6}>
+                                    {post.votes.length > 0 && (
+                                        <p className="mr-1" >{post.votes.length} <FontAwesomeIcon size="sm" color="coral" icon="heart"></FontAwesomeIcon></p>
+                                    )}
+                                    {post.comments.length > 0 && (
+                                        <a onClick={this._viewComments} ><p>{post.comments.length} {post.comments.length > 1 ? 'Comments' : 'Comment'}</p></a>
+                                    )}
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm={1}></Col>
-                                <Col sm={5}>
+                                <Col sm={6}>
                                     {showComments && (
                                         post.comments.map((comment, i) => (
                                             <div key={i} className="card-row__comment">
-                                                <p><span className="user">{comment.user.firstName} {comment.user.lastName}</span> {comment.description}</p> 
+                                                <p><span className="user">{comment.user.firstName} {comment.user.lastName}</span> {comment.description}</p>
                                             </div>
                                         ))
                                     )}
@@ -160,9 +158,9 @@ class Post extends Component {
 
                 <CompModal isOpen={this.state.isOpen} toggle={this._toggleCommentModal}>
                     <ModalHeader>Create a Comment</ModalHeader>
-                    <Mutation 
-                        mutation={POST_COMMENT_MUTATION} 
-                        variables={{ postId: post.id, description: this.state.description }} 
+                    <Mutation
+                        mutation={POST_COMMENT_MUTATION}
+                        variables={{ postId: post.id, description: this.state.description }}
                         refetchQueries={[{ query: POSTS_QUERY, variables: { filter: post.types[0] } }]}
                     >
                         {(createComment, { error, loading, called }) => (

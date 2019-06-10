@@ -59,11 +59,11 @@ class Header extends Component {
 
     render() {
         const { currentUser } = this.props;
-
+        console.log("Current", currentUser)
         return (
             <div>
                 {!currentUser ? (
-                    <Navbar color="dark" dark expand="md">
+                    <Navbar expand="md">
                         <NavbarBrand onKeyDown={this._handleKeyDown} href="/">
                             FocusLoop
                         </NavbarBrand>
@@ -91,19 +91,19 @@ class Header extends Component {
                         </Collapse>
                     </Navbar>
                 ) : (
-                        <Navbar color="dark" dark expand="md">
+                        <Navbar expand="md">
                             <NavbarBrand 
                                 href="/"
                                 onKeyDown={this._handleKeyDown} 
                                 >
-                                Compounding
+                                FocusLoop
                             </NavbarBrand>
                             <NavbarToggler onClick={this.toggle} />
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
                                     <UncontrolledDropdown nav inNavbar>
                                         <div className="d-flex align-items-center" >
-                                            <a style={{ fontSize: 15, cursor: 'default', color: '#CCCDCF' }}>Hello {currentUser.firstName}</a> 
+                                            <a style={{ fontSize: 15, cursor: 'default', color: '#243E5A' }}>Hello {currentUser.firstName}</a> 
                                             <DropdownToggle nav>
                                                 <FontAwesomeIcon size="lg" icon="user-circle"></FontAwesomeIcon>
                                             </DropdownToggle>

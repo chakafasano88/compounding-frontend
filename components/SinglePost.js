@@ -126,12 +126,12 @@ class SinglePost extends Component {
                 <CompCard className={`${isEditing && 'editor'}`} >
                     <CardHeader className="d-flex justify-content-between align-items-center">{post.title.toUpperCase()}
                         {currentUser && currentUser.permissions[0] === 'ADMIN' && (
-                        <Button
-                            type="button"
-                            size="sm"
-                            onClick={this._editPost}
-                            color="primary">
-                            <FontAwesomeIcon size="sm" icon="edit" color="white"> </FontAwesomeIcon> Edit
+                            <Button
+                                type="button"
+                                size="sm"
+                                onClick={this._editPost}
+                                color="primary">
+                                <FontAwesomeIcon size="sm" icon="edit" color="white"> </FontAwesomeIcon> Edit
                         </Button>)}
 
                     </CardHeader>
@@ -219,23 +219,29 @@ class SinglePost extends Component {
 
                                         const res = await createVote();
                                     }}>
-                                        <Row>
-                                            <Col sm={12}>
-                                                <div className="comment-vote__wrapper">
-                                                    <Button
-                                                        type="submit">
-                                                        <FontAwesomeIcon color={post.votes && currentUser && post.votes.find(p => p.user.id === currentUser.id) ? 'coral' : 'grey'} icon="heart"
-                                                        >
-                                                        </FontAwesomeIcon> Like
-                                                </Button>
-                                                    <Button
-                                                        type="button"
-                                                        onClick={this._toggleCommentModal}
-                                                        className="comment__button"
+                                        <Row className="comment-like__row" >
+                                            <Col className="comment-vote__column" sm={6}>
+                                                <Button
+                                                    type="submit">
+                                                    <FontAwesomeIcon color={post.votes && currentUser && post.votes.find(p => p.user.id === currentUser.id) ? 'coral' : 'grey'} icon="heart"
                                                     >
-                                                        <FontAwesomeIcon icon="comment"></FontAwesomeIcon> Comment
-                                                </Button>
-                                                </div>
+                                                    </FontAwesomeIcon> Like
+                                        </Button>
+                                                <Button
+                                                    type="button"
+                                                    onClick={this._toggleCommentModal}
+                                                    className="comment__button"
+                                                >
+                                                    <FontAwesomeIcon icon="comment"></FontAwesomeIcon> Comment
+                                        </Button>
+                                            </Col>
+                                            <Col className="post-info__column" sm={6}>
+                                                {post.votes.length > 0 && (
+                                                    <p className="mr-1" >{post.votes.length} <FontAwesomeIcon size="sm" color="coral" icon="heart"></FontAwesomeIcon></p>
+                                                )}
+                                                {post.comments.length > 0 && (
+                                                    <a onClick={this._viewComments} ><p>{post.comments.length} {post.comments.length > 1 ? 'Comments' : 'Comment'}</p></a>
+                                                )}
                                             </Col>
                                         </Row>
                                         <Row>

@@ -153,33 +153,34 @@ div[tabindex="1"]:focus {
     }
   }
 
-  .comment-vote__wrapper {
-    width: 500px;
-    .btn {
-      border: none;
-      background: none;
-      color: $comp-dkgrey;
-      font-size: 12px;
-
-      &:hover {
-        background-color: $comp-offwhite;
+  .comment-like__row {
+    border-top: 1px solid $comp-ltsilver;
+    .comment-vote__column {
+      .btn {
+        border: none;
+        background: none;
+        color: $comp-dkgrey;
+        font-size: 12px;
+  
+        &:hover {
+          background-color: $comp-offwhite;
+        }
+  
+        &:focus {
+          outline: none;
+        }
+  
+        &:active {
+          outline: 0;
+        }
+        
       }
-
-      &:focus {
-        outline: none;
-      }
-
-      &:active {
-        outline: 0;
-      }
-      
     }
-  }
-
-  .post-info__row {
+  
     .post-info__column {
       display: flex;
-      border-bottom: 1px solid $comp-ltsilver;
+      justify-content: flex-end;
+      padding-top: 6px;
       a:hover {
         text-decoration: underline;
       }
@@ -212,7 +213,7 @@ div[tabindex="1"]:focus {
 
   .navbar {
     height: 80px;
-    background-color: $comp-white;
+    background-color: rgb(236, 253, 245);
     .navbar-brand {
         color: #56d7a5
     }
