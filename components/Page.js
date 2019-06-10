@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import { ToastContainer, cssTransition } from 'react-toastify';
 import "../index.scss";
+import Meta from './Meta';
 
 class Page extends Component {
     render() {
@@ -23,6 +24,7 @@ class Page extends Component {
                     fontSize: ".85rem"
                     }}
                  />
+                 <Meta />
                 <Header currentUser={currentUser} />
                 {this.props.children}
                 <footer></footer>
