@@ -59,7 +59,7 @@ class Header extends Component {
 
     render() {
         const { currentUser } = this.props;
-        console.log("Current", currentUser)
+        
         return (
             <div>
                 {!currentUser ? (

@@ -103,7 +103,7 @@ class Post extends Component {
                                         <div className="card-row__details">
                                             <span className="card-row__title">
                                             </span>
-                                            <div className="card-row__dates">{`${moment(post.date_created).format("MMMM Do YYYY, h:mm a")}`}</div>
+                                            <div className="card-row__dates">{`${moment(post.createdAt).format("MMMM Do YYYY, h:mm a")}`}</div>
                                             {post.description !== "" && (
                                                 <div className="card-row__message">
                                                     <div

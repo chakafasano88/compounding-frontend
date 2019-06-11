@@ -16,6 +16,7 @@ const POSTS_QUERY = gql`
             url
             title
             types
+            createdAt
             votes {
                 id
                 user {
