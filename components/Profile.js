@@ -66,7 +66,6 @@ class Profile extends Component {
         this.setState({ [e.target.name]: e.target.value, formProcessing: false });
     }
 
-
     _uploadFile = async e => {
         const files = e.target.files;
         const data = new FormData();

@@ -4,7 +4,7 @@ import Profile from '../components/Profile';
 const ProfilePage = (props) => {
     return (
         <div>
-            <Profile currentUser={props.currentUser} />
+            {props.currentUser && (<Profile currentUser={props.currentUser} />)}
         </div>
     );
 };
