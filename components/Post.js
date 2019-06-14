@@ -69,13 +69,21 @@ class Post extends Component {
         this.setState({ showComments: !showComments })
     }
 
+    _renderCroppedImage = (image) => {
+        let updatedImage = image.slice();
+        updatedImage = `${updatedImage.split('upload/v')[0]}upload/w_380,h_380,c_crop,g_face,r_max/w_200/compounding${updatedImage.split('compounding')[1]}`
+
+        return updatedImage;
+    }
+
+
     render() {
         const { post, currentUser } = this.props;
         const { showComments } = this.state;
 
-        let trimmedString = post.description.substr(0, 200);
+        let trimmedString = post.description.substr(0, 180);
         trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
-        console.log("posst", post)
+        
         return (
             <div>
                 <Mutation
@@ -107,7 +115,7 @@ class Post extends Component {
                                             {post.description !== "" && (
                                                 <div className="card-row__message">
                                                     <div
-                                                        dangerouslySetInnerHTML={{ __html: `${trimmedString}${trimmedString.length > 195 ? ('...') : ''}` }}
+                                                        dangerouslySetInnerHTML={{ __html: `${trimmedString}${trimmedString.length >= 180 ? ('...') : ''}` }}
                                                     />
                                                 </div>
                                             )}
@@ -144,8 +152,15 @@ class Post extends Component {
                                 <Col sm={6}>
                                     {showComments && (
                                         post.comments.map((comment, i) => (
-                                            <div key={i} className="card-row__comment">
-                                                <p><span className="user">{comment.user.firstName} {comment.user.lastName}</span> {comment.description}</p>
+                                            <div key={i} className="card-row__comment--container">
+                                                {comment.user.profileImage && (
+                                                    <div>
+                                                        <img src={this._renderCroppedImage(comment.user.profileImage)} alt="" />
+                                                    </div>
+                                                )}
+                                                <div className="card-row__comment">
+                                                    <p><span className="user">{comment.user.firstName} {comment.user.lastName}</span> {comment.description}</p>
+                                                </div>
                                             </div>
                                         ))
                                     )}

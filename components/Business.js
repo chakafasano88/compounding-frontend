@@ -8,6 +8,8 @@ import Post from './Post';
 import Loader from "./Loader";
 import PostList from "../components/PostList";
 import { POSTS_QUERY } from './Think';
+import SubNav from '../components/common/sub-nav/SubNav';
+import FocusWrapper from '../components/common/focus-wrapper/FocusWrapper';
 
 class Business extends Component {
     constructor(props) {
@@ -18,11 +20,12 @@ class Business extends Component {
         const filter = { filter: "BUSINESS" };
         const { currentUser } = this.props;
         return (
-            <div>
+            <FocusWrapper refName={(c) => { this.thinkingWrapper = c; }} >
+                <SubNav className="mb-4" />
                 <Row className="no-gutter" >
                     <Col sm={8}>
                         <CompCard>
-                            <CardHeader>Busniness Articles</CardHeader>
+                            <CardHeader>Business Articles</CardHeader>
                             <CardBody>
                                 <Query query={POSTS_QUERY} variables={filter} >
                                     {({ data, error, loading }) => {
@@ -46,7 +49,7 @@ class Business extends Component {
                         </CompCard>
                     </Col>
                 </Row>
-            </div>
+            </FocusWrapper>
         );
     }
 }

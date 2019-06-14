@@ -61,13 +61,13 @@ class Header extends Component {
         const { currentUser } = this.props;
         
         return (
-            <div>
+            <div> 
                 {!currentUser ? (
                     <Navbar expand="md">
                         <NavbarBrand onKeyDown={this._handleKeyDown} href="/">
                             FocusLoop
                         </NavbarBrand>
-                        <NavbarToggler onClick={this.toggle} />
+                        <NavbarToggler onClick={this._toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <UncontrolledDropdown nav inNavbar>
@@ -91,24 +91,24 @@ class Header extends Component {
                         </Collapse>
                     </Navbar>
                 ) : (
-                        <Navbar expand="md">
+                        <Navbar color="light" light expand="sm">
                             <NavbarBrand 
                                 href="/"
                                 onKeyDown={this._handleKeyDown} 
                                 >
                                 FocusLoop
                             </NavbarBrand>
-                            <NavbarToggler onClick={this.toggle} />
+                            <NavbarToggler className="custom-toggler" onClick={this._toggle} />
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
                                     <UncontrolledDropdown nav inNavbar>
-                                        <div className="d-flex align-items-center" >
+                                        <div className="d-flex align-items-center fullscreen__dropdown" >
                                             <a style={{ fontSize: 15, cursor: 'default', color: '#243E5A' }}>Hello {currentUser.firstName}</a> 
                                             <DropdownToggle nav>
                                                 <FontAwesomeIcon size="lg" icon="user-circle"></FontAwesomeIcon>
                                             </DropdownToggle>
                                         </div>
-                                        <DropdownMenu className="animate slideIn" right>
+                                        <DropdownMenu className={`animate slideIn ${this.state.isOpen ? 'show' : ''}`} right>
                                             <Link href="/post">
                                                 <DropdownItem>
                                                     <a>Articles</a>

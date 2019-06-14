@@ -30,7 +30,7 @@ import { POST_VOTE_MUTATION, POST_COMMENT_MUTATION } from './Post';
 import { POSTS_QUERY } from './Think';
 import { CREATE_POST_MUTATION } from './CreatePost';
 import { toast } from 'react-toastify';
-
+import moment from 'moment';
 
 let ReactQuill = null
 
@@ -106,6 +106,17 @@ class SinglePost extends Component {
         }
     }
 
+    _renderCroppedImage = (image) => {
+        let updatedImage = image.slice();
+        updatedImage = `${updatedImage.split('upload/v')[0]}upload/w_380,h_380,c_crop,g_face,r_max/w_200/compounding${updatedImage.split('compounding')[1]}`
+
+        return updatedImage;
+    }
+
+    _formatDate = () => {
+
+    }
+
     render() {
         const { post, currentUser } = this.props
         const {
@@ -120,7 +131,7 @@ class SinglePost extends Component {
             formSubmitted,
             typeOptions
         } = this.state;
-        console.log("current", currentUser)
+
         return (
             <div>
                 <CompCard className={`${isEditing && 'editor'}`} >
@@ -201,12 +212,6 @@ class SinglePost extends Component {
                         {!isEditing && (
                             <>
                             <div dangerouslySetInnerHTML={{ __html: `${post.description}` }} />
-                            <Row className="post-info__row">
-                                <Col sm={12} className="post-info__column">
-                                    {post.votes && post.votes.length > 0 && (<p className="mr-1" >{post.votes.length} <FontAwesomeIcon size="sm" color="coral" icon="heart"></FontAwesomeIcon></p>)}
-                                    {post.comments && post.comments.length > 0 && (<a onClick={this._viewComments} ><p>{post.comments.length} {post.comments.length > 1 ? 'Comments' : 'Comment'}</p></a>)}
-                                </Col>
-                            </Row>
                             <Mutation
                                 mutation={POST_VOTE_MUTATION}
                                 variables={{ postId: post.id }}
@@ -226,14 +231,14 @@ class SinglePost extends Component {
                                                     <FontAwesomeIcon color={post.votes && currentUser && post.votes.find(p => p.user.id === currentUser.id) ? 'coral' : 'grey'} icon="heart"
                                                     >
                                                     </FontAwesomeIcon> Like
-                                        </Button>
+                                                </Button>
                                                 <Button
                                                     type="button"
                                                     onClick={this._toggleCommentModal}
                                                     className="comment__button"
                                                 >
                                                     <FontAwesomeIcon icon="comment"></FontAwesomeIcon> Comment
-                                        </Button>
+                                                </Button>
                                             </Col>
                                             <Col className="post-info__column" sm={6}>
                                                 {post.votes.length > 0 && (
@@ -248,8 +253,24 @@ class SinglePost extends Component {
                                             <Col sm={6}>
                                                 {showComments && (
                                                     post.comments.map((comment, i) => (
-                                                        <div key={i} className="card-row__comment">
-                                                            <p><span className="user">{comment.user.firstName} {comment.user.lastName}</span> {comment.description}</p>
+                                                        <div key={i} >
+                                                            <div className="card-row__comment--container">
+                                                                {comment.user.profileImage && (
+                                                                    <div>
+                                                                        <img src={this._renderCroppedImage(comment.user.profileImage)} alt="" />
+                                                                    </div>
+                                                                )}
+                                                                <div className="card-row__comment">
+                                                                    <p><span className="user">{comment.user.firstName} {comment.user.lastName}</span> {comment.description}</p>
+                                                                </div>
+                                                            </div>
+                                                            <Row>
+                                                                <Col sm={1}/>
+                                                                <Col sm={5}>
+                                                                    <p>{`${moment(comment.createdAt).fromNow()}`}</p>
+                                                                </Col>
+                                                                <Col sm={6}/>
+                                                            </Row>
                                                         </div>
                                                     ))
                                                 )}

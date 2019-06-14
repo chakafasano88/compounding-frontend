@@ -95,6 +95,51 @@ div[tabindex="1"]:focus {
 }
 
 
+  @mixin navigation__letter {
+    border: 1px solid #C2F8DA;
+    background-color: #C2F8DA;
+    color: #7AD3A8;
+    padding: 7.5px 15px;
+    margin-right: 5px;
+    border-radius: 10px; 
+    font-size: 45px;
+    font-weight: bold;
+
+    &.skinny {
+      padding: 7.5px 20px;
+    }
+
+    &.lg {
+      font-size: 50px;
+    }
+
+    &.sm {
+      font-size: 24px;
+    }
+  }
+
+  .sub-nav {   
+    a {
+      font-size: 30px;
+      text-decoration: none;
+
+      .grow { transition: all .2s ease-in-out; }
+      .grow:hover { transform: scale(1.15); }
+      &.hover { transform: scale(1.15); } 
+
+      .navigation__letter {
+        @include navigation__letter;
+        transition: all .2s ease-in-out;
+        &.highlight {
+          color: $brand-primary;
+          box-shadow: 2px 2px 1px rgb(206, 205, 205);
+          transform: scale(1.15);
+        }
+      }
+    }
+  }
+
+
   .navigation {
     height: 80vh;
     padding: 30px 0;
@@ -106,26 +151,9 @@ div[tabindex="1"]:focus {
     a {
       font-size: 30px;
       text-decoration: none;
-      
       .navigation__letter {
-        border: 1px solid #C2F8DA;
-        background-color: #C2F8DA;
-        color: #7AD3A8;
-        padding: 7.5px 15px;
-        margin-right: 2px;
-        border-radius: 10px; 
-        font-size: 45px;
-        font-weight: bold;
-
-        &.skinny {
-          padding: 7.5px 20px;
-        }
-
-        &.lg {
-          font-size: 50px;
-        }
+        @include navigation__letter;
       }
-
     }
   }
 
@@ -213,13 +241,19 @@ div[tabindex="1"]:focus {
 
   .navbar {
     height: 80px;
-    background-color: rgb(236, 253, 245);
+    background-color: #ecfdf5 !important;
     .navbar-brand {
-        color: #56d7a5
+        color: $comp-green;
+        font-size: 2rem;
+
+        &:focus {
+          color: $comp-green;
+        }
+
     }
 
     .navbar-brand:hover {
-      color: #56d7a5
+      color: $comp-green;
     }
   }
   
@@ -264,6 +298,26 @@ div[tabindex="1"]:focus {
 	background-size: auto 60%;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
+}
+
+.profile__img--wrapper {
+    text-align: center;
+    img {
+      border-radius: 50%;
+      border: 5px solid grey;
+      object-fit: cover;
+      width: 200px;
+      height: 200px;
+    }
+}
+
+.profile__list-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ul > li {
+    padding-top: 10px;
+  }
 }
 
 .loader__backdrop {
@@ -318,7 +372,7 @@ input.is-invalid.form-control {
 }
   
 .Toastify__toast--success {       
-  background-color: #40D78E !important;       
+  background-color: $comp-green !important;       
 }
   
 .Toastify__toast--error {
@@ -343,5 +397,57 @@ select {
   }
   &.form-control:disabled {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 1440'%3E%3Cpath fill='%23999' d='m720 1090l-576-576h1152z'/%3E%3C/svg%3E");
+  }
+}
+
+@media screen and (max-width: 576px) { 
+  .page__wrapper {
+    padding: 15px;
+  }
+
+  // .fullscreen__dropdown {
+  //   display: none !important;
+  // }
+
+  .navbar {
+    height: 80px;
+    background-color: #243E5A !important;
+    .navbar-brand {
+        color: $comp-green;
+        font-size: 2rem;;
+    }
+
+    // .navbar-toggler:before {
+    //   background-color: white;
+    //   font-family: FontAwesome;
+    //   content: ;
+    // }
+
+    .custom-toggler {
+        border: none;
+
+        .navbar-toggler-icon {
+          background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+        }
+    }
+  }
+
+  .navigation {
+    height: 80vh;
+    padding: 30px 0;
+    .link-container {
+      display: grid;
+      padding: 100px;
+    }
+
+    a {
+      font-size: 30px;
+      text-decoration: none;
+      
+      .navigation__letter {
+        @include navigation__letter;
+      }
+
+    }
   }
 }

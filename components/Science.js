@@ -8,6 +8,8 @@ import Post from './Post';
 import Loader from "./Loader";
 import PostList from "../components/PostList";
 import { POSTS_QUERY } from './Think';
+import SubNav from '../components/common/sub-nav/SubNav';
+import FocusWrapper from '../components/common/focus-wrapper/FocusWrapper';
 
 class Science extends Component {
     constructor(props) {
@@ -18,7 +20,8 @@ class Science extends Component {
         const filter = { filter: "SCIENCE" };
         const { currentUser } = this.props;
         return (
-            <div>
+            <FocusWrapper refName={(c) => { this.thinkingWrapper = c; }} >
+                <SubNav className="mb-4" />
                 <Row className="no-gutter" >
                     <Col sm={8}>
                         <CompCard>
@@ -46,7 +49,7 @@ class Science extends Component {
                         </CompCard>
                     </Col>
                 </Row>
-            </div>
+            </FocusWrapper >
         );
     }
 }

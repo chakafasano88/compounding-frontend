@@ -7,6 +7,10 @@ import CompCard from '../components/common/card/Card'
 import Post from './Post';
 import Loader from "./Loader";
 import PostList from "../components/PostList";
+import Link from 'next/link';
+import SubNav from '../components/common/sub-nav/SubNav';
+import FocusWrapper from '../components/common/focus-wrapper/FocusWrapper';
+import Router from 'next/router';
 
 const POSTS_QUERY = gql`
     query POSTS_QUERY($filter: String!){
@@ -20,17 +24,20 @@ const POSTS_QUERY = gql`
             votes {
                 id
                 user {
+
                     id
                 }
             }
             comments {
                 id
                 description
+                createdAt
                 user {
                     id
                     email
                     firstName
                     lastName
+                    profileImage
                 }
             }
             postedBy { 
@@ -46,11 +53,17 @@ class Think extends Component {
         super(props)
     }
 
+    componentDidMount() {
+        this.thinkingWrapper.focus();
+    }
+
     render() {
         const { currentUser } = this.props;
         const filter = { filter: 'THINKING' }
+
         return (
-            <div>
+            <FocusWrapper refName={(c) => { this.thinkingWrapper = c; }} >
+                <SubNav className="mb-4" />
                 <Row className="no-gutter" >
                     <Col sm={8}>
                         <CompCard>
@@ -61,9 +74,9 @@ class Think extends Component {
                                         if (loading) return <p>Loading...</p>;
                                         if (error) return <p>Error: {error.message}</p>;
                                         return (
-                                        <div>
-                                           <PostList posts={data.posts} currentUser={currentUser} />
-                                        </div>
+                                            <div>
+                                                <PostList posts={data.posts} currentUser={currentUser} />
+                                            </div>
                                         );
                                     }}
                                 </Query>
@@ -75,10 +88,10 @@ class Think extends Component {
                             <CardHeader>Trending Articles</CardHeader>
                             <CardBody>
                             </CardBody>
-                        </CompCard>           
+                        </CompCard>
                     </Col>
                 </Row>
-            </div>
+            </FocusWrapper>
         );
     }
 }

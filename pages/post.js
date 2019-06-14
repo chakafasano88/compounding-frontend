@@ -21,11 +21,14 @@ const SINGLE_POST_QUERY = gql`
     comments {
         id
         description
+        createdAt
         user {
             id
             email
             firstName
             lastName
+            profileImage
+            
         }
     }
       postedBy { 

@@ -20,20 +20,9 @@
 // 23px = 1.4375rem
 // 24px = 1.5rem
 
-// Fields
-// Required Asterisk
-label span.required {
-    color: $comp-label-required-color;
-}
-
-
-//
-// Default CompCard Styles
-//
-
 .comp-card-wrapper { // wraps the .comp-card.card element.
     margin: 0;
-    padding: 1px 3px 3px 3px; // give space for box-shadow to render
+    padding: 1px 3px 3px 3px;
 }
 
 .comp-card {
@@ -138,28 +127,43 @@ label span.required {
         background-color: $comp-dksilver;  
     }
 
-    .card-row__comment {
-        padding: 10px 8px;
-        margin-top: 10px;
-        font-size: .75rem;
-        color: $comp-mdgrey;
-        background-color: lighten($comp-dksilver, 10%);
+    .card-row__comment--container {
         display: flex;
-        line-height: 1.1rem;
-        border-radius: 20px; 
-        p {
-            margin: 0;
+        padding-bottom: 10px;
+
+        img {
+            width: 40px;
+            height: 40px;
+            mix-blend-mode: multiply;
+            margin-top: 10px; 
+            margin-right: 10px; 
         }
-        .user {
-            font-weight: bold;
-        }
-        i {
-          font-size: 16px;
-          margin-right: 7px;
-          vertical-align:-0.1rem;
+
+        .card-row__comment {
+            padding: 10px 8px;
+            margin-top: 10px;
+            font-size: .75rem;
+            color: $comp-mdgrey;
+            background-color: lighten($comp-dksilver, 10%);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            line-height: 1.1rem;
+            border-radius: 20px; 
+            p {
+                margin: 0;
+            }
+            .user {
+                font-weight: bold;
+            }
+            i {
+              font-size: 16px;
+              margin-right: 7px;
+              vertical-align:-0.1rem;
+            }
         }
     }
-
+   
     .card-row__details-dates {
       font-size: .8125rem;
     }

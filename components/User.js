@@ -8,8 +8,11 @@ const CURRENT_USER_QUERY = gql`
             id
             firstName
             lastName
+            company
+            occupation
             email
             permissions
+            profileImage
         }
     }
 `;          
