@@ -102,7 +102,7 @@ class Header extends Component {
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
                                     <UncontrolledDropdown nav inNavbar>
-                                        <div className="d-flex align-items-center fullscreen__dropdown" >
+                                        <div className="d-flex align-items-center hidden-sm fullscreen__dropdown" >
                                             <a style={{ fontSize: 15, cursor: 'default', color: '#243E5A' }}>Hello {currentUser.firstName}</a> 
                                             <DropdownToggle nav>
                                                 <FontAwesomeIcon size="lg" icon="user-circle"></FontAwesomeIcon>

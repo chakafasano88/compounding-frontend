@@ -123,10 +123,6 @@ div[tabindex="1"]:focus {
       font-size: 30px;
       text-decoration: none;
 
-      .grow { transition: all .2s ease-in-out; }
-      .grow:hover { transform: scale(1.15); }
-      &.hover { transform: scale(1.15); } 
-
       .navigation__letter {
         @include navigation__letter;
         transition: all .2s ease-in-out;
@@ -405,9 +401,9 @@ select {
     padding: 15px;
   }
 
-  // .fullscreen__dropdown {
-  //   display: none !important;
-  // }
+  .fullscreen__dropdown {
+    display: none !important;
+  }
 
   .navbar {
     height: 80px;
@@ -416,12 +412,6 @@ select {
         color: $comp-green;
         font-size: 2rem;;
     }
-
-    // .navbar-toggler:before {
-    //   background-color: white;
-    //   font-family: FontAwesome;
-    //   content: ;
-    // }
 
     .custom-toggler {
         border: none;
