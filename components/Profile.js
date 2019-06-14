@@ -58,8 +58,10 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        const { email, firstName, lastName, profileImage, occupation, company } = this.props.currentUser;
-        this.setState({ email, firstName, lastName, profileImage, company, occupation })
+        if (this.props.currentUser) {
+            const { email, firstName, lastName, profileImage, occupation, company } = this.props.currentUser;
+            this.setState({ email, firstName, lastName, profileImage, company, occupation })
+        }
     }
 
     _saveToState = (e) => {
@@ -186,7 +188,7 @@ class Profile extends Component {
                                                 </Col>
                                             </Row>
 
-                                                
+
                                             <Row>
                                                 <Col sm={6}>
                                                     <FormGroup>
