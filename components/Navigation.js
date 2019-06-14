@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Container, Row, Col } from 'reactstrap';
 import Router from 'next/router';
 import '../index.scss';
-import KeyPress from './KeyPress';
 import FocusWrapper from '../components/common/focus-wrapper/FocusWrapper';
 
 class Navigation extends React.Component {
