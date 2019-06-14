@@ -15,7 +15,7 @@ class Navigation extends React.Component {
   render() {
 
     return (
-      <FocusWrapper refName={(c) => { this.navigationWrapper = c; }} >
+      <FocusWrapper navPrefix={false} refName={(c) => { this.navigationWrapper = c; }} >
         <Container className="navigation">
           <Row>
             <Col sm={12} md={6} className="link-container">

@@ -51,18 +51,30 @@ const POSTS_QUERY = gql`
 class Think extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            linkIdNames: {
+                thinking: 'think__thinking',
+                business: 'think__business',
+                science: 'think__science',
+                investing: 'think__science'
+            }
+        }
     }
+
+
+
 
     componentDidMount() {
         this.thinkingWrapper.focus();
     }
 
     render() {
+        const { thinking, business, science, investing } = this.state.linkIdNames;
         const { currentUser } = this.props;
         const filter = { filter: 'THINKING' }
 
         return (
-            <FocusWrapper refName={(c) => { this.thinkingWrapper = c; }} >
+            <FocusWrapper navPrefix={true} refName={(c) => { this.thinkingWrapper = c; }} >
                 <SubNav className="mb-4" />
                 <Row className="no-gutter" >
                     <Col sm={8}>

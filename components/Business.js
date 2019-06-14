@@ -14,13 +14,27 @@ import FocusWrapper from '../components/common/focus-wrapper/FocusWrapper';
 class Business extends Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            linkIdNames: {
+                thinking: 'business__thinking',
+                business: 'business__business',
+                science: 'business__science',
+                investing: 'business__science'
+            }
+        }
+    }
+
+    componentDidMount() {
+        this.businessWrapper.focus();
     }
 
     render() {
+        const { thinking, business, science, investing } = this.state.linkIdNames;
         const filter = { filter: "BUSINESS" };
         const { currentUser } = this.props;
         return (
-            <FocusWrapper refName={(c) => { this.thinkingWrapper = c; }} >
+            <FocusWrapper navPrefix={true} linkIds={this.state.linkIdNames} refName={(c) => { this.businessWrapper = c; }} >
                 <SubNav className="mb-4" />
                 <Row className="no-gutter" >
                     <Col sm={8}>

@@ -14,13 +14,29 @@ import FocusWrapper from '../components/common/focus-wrapper/FocusWrapper';
 class Science extends Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            linkIdNames: {
+                thinking: 'science__thinking',
+                business: 'science__business',
+                science: 'science__science',
+                investing: 'science__science'
+            }
+        }
+
     }
 
+    componentDidMount() {
+        this.scienceWrapper.focus();
+    }
+
+
     render() {
+        const { thinking, business, science, investing } = this.state.linkIdNames;
         const filter = { filter: "SCIENCE" };
         const { currentUser } = this.props;
         return (
-            <FocusWrapper refName={(c) => { this.thinkingWrapper = c; }} >
+            <FocusWrapper navPrefix={true} refName={(c) => { this.scienceWrapper = c; }} >
                 <SubNav className="mb-4" />
                 <Row className="no-gutter" >
                     <Col sm={8}>
