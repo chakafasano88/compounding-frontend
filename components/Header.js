@@ -38,18 +38,18 @@ class Header extends Component {
     }
 
     componentDidMount() {
-        
+
     }
 
     _handleKeyDown = (event) => {
         const key = event.keyCode;
-    
+
         switch (key) {
-          case 84:
-            let tag1 = document.getElementById('thinking');
-            tag1.className = "hover";
-            this._timeout('/thinking');
-            return;
+            case 84:
+                let tag1 = document.getElementById('thinking');
+                tag1.className = "hover";
+                this._timeout('/thinking');
+                return;
         }
     }
 
@@ -59,22 +59,24 @@ class Header extends Component {
 
     render() {
         const { currentUser } = this.props;
-        
+
         return (
-            <div> 
+            <div>
                 {!currentUser ? (
-                    <Navbar expand="md">
+                    <Navbar color="light" light expand="sm">
                         <NavbarBrand onKeyDown={this._handleKeyDown} href="/">
                             FocusLoop
                         </NavbarBrand>
-                        <NavbarToggler onClick={this._toggle} />
+                        <NavbarToggler className="custom-toggler" onClick={this._toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <UncontrolledDropdown nav inNavbar>
-                                    <DropdownToggle nav caret>
-                                        Login
-                                        </DropdownToggle>
-                                    <DropdownMenu className="animate slideIn"  right>
+                                    <div className="d-flex align-items-center fullscreen__dropdown" >
+                                        <DropdownToggle nav caret>
+                                            Login
+                                    </DropdownToggle>
+                                    </div>
+                                    <DropdownMenu className={`${this.state.isOpen ? 'show' : ''}`} right>
                                         <Link href="/login">
                                             <DropdownItem>
                                                 <a>Login</a>
@@ -92,18 +94,18 @@ class Header extends Component {
                     </Navbar>
                 ) : (
                         <Navbar color="light" light expand="sm">
-                            <NavbarBrand 
+                            <NavbarBrand
                                 href="/"
-                                onKeyDown={this._handleKeyDown} 
-                                >
+                                onKeyDown={this._handleKeyDown}
+                            >
                                 FocusLoop
                             </NavbarBrand>
                             <NavbarToggler className="custom-toggler" onClick={this._toggle} />
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
                                     <UncontrolledDropdown nav inNavbar>
-                                        <div className="d-flex align-items-center hidden-sm fullscreen__dropdown" >
-                                            <a style={{ fontSize: 15, cursor: 'default', color: '#243E5A' }}>Hello {currentUser.firstName}</a> 
+                                        <div className="d-flex align-items-center fullscreen__dropdown" >
+                                            <a style={{ fontSize: 15, cursor: 'default', color: '#243E5A' }}>Hello {currentUser.firstName}</a>
                                             <DropdownToggle nav>
                                                 <FontAwesomeIcon size="lg" icon="user-circle"></FontAwesomeIcon>
                                             </DropdownToggle>
